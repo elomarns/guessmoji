@@ -38,6 +38,12 @@ defmodule Guessmoji.MediaTest do
       assert {:error, %Ecto.Changeset{}} = Media.create_language(@invalid_attrs)
     end
 
+    test "create_language/1 with an existing name returns error changeset" do
+      language_fixture(@valid_attrs)
+      assert {:error, %Ecto.Changeset{} = changeset} = Media.create_language(@valid_attrs)
+      assert %{name: ["has already been taken"]} = errors_on(changeset)
+    end
+
     test "update_language/2 with valid data updates the language" do
       language = language_fixture()
       assert {:ok, %Language{} = language} = Media.update_language(language, @update_attrs)
@@ -95,6 +101,12 @@ defmodule Guessmoji.MediaTest do
 
     test "create_category/1 with invalid data returns error changeset" do
       assert {:error, %Ecto.Changeset{}} = Media.create_category(@invalid_attrs)
+    end
+
+    test "create_category/1 with an existing name returns error changeset" do
+      category_fixture(@valid_attrs)
+      assert {:error, %Ecto.Changeset{} = changeset} = Media.create_category(@valid_attrs)
+      assert %{name: ["has already been taken"]} = errors_on(changeset)
     end
 
     test "update_category/2 with valid data updates the category" do
