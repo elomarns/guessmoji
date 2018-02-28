@@ -1,5 +1,5 @@
 defmodule Guessmoji.Media.LanguageTest do
-  use Guessmoji.DataCase
+  use Guessmoji.DataCase, async: true
   alias Guessmoji.Media.Language
 
   @valid_attrs %{name: "Portuguese"}

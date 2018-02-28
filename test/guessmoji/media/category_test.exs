@@ -1,5 +1,5 @@
 defmodule Guessmoji.Media.CategoryTest do
-  use Guessmoji.DataCase
+  use Guessmoji.DataCase, async: true
   alias Guessmoji.Media.Category
 
   @valid_attrs %{name: "Books"}
