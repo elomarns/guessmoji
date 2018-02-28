@@ -22,6 +22,7 @@ defmodule Guessmoji.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import Guessmoji.DataCase
+      import Guessmoji.Fixtures
     end
   end
 
