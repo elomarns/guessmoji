@@ -57,4 +57,32 @@ defmodule Guessmoji.Media do
   def change_category(%Category{} = category) do
     Category.changeset(category, %{})
   end
+
+  alias Guessmoji.Media.Emoji
+
+  def list_emojis do
+    Repo.all(Emoji)
+  end
+
+  def get_emoji!(id), do: Repo.get!(Emoji, id)
+
+  def create_emoji(attrs \\ %{}) do
+    %Emoji{}
+    |> Emoji.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def update_emoji(%Emoji{} = emoji, attrs) do
+    emoji
+    |> Emoji.changeset(attrs)
+    |> Repo.update()
+  end
+
+  def delete_emoji(%Emoji{} = emoji) do
+    Repo.delete(emoji)
+  end
+
+  def change_emoji(%Emoji{} = emoji) do
+    Emoji.changeset(emoji, %{})
+  end
 end

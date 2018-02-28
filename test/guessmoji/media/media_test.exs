@@ -132,4 +132,102 @@ defmodule Guessmoji.MediaTest do
       assert %Ecto.Changeset{} = Media.change_category(category)
     end
   end
+
+  describe "emojis" do
+    alias Guessmoji.Media.Emoji
+
+    @valid_attrs %{content: "🐒👑", decoded_content: "King Kong", tip: nil}
+    @update_attrs %{content: "🆙", decoded_content: "Up", tip: nil}
+    @invalid_attrs %{
+      content: nil,
+      decoded_content: nil,
+      tip: nil,
+      language_id: nil,
+      category_id: nil
+    }
+
+    def emoji_fixture(attrs \\ %{}) do
+      valid_attrs =
+        Enum.into(@valid_attrs, %{
+          language_id: language_fixture(%{name: "English"}).id,
+          category_id: category_fixture(%{name: "Movies"}).id
+        })
+
+      {:ok, emoji} =
+        attrs
+        |> Enum.into(valid_attrs)
+        |> Media.create_emoji()
+
+      emoji
+    end
+
+    test "list_emojis/0 returns all emojis" do
+      emoji = emoji_fixture()
+      assert Media.list_emojis() == [emoji]
+    end
+
+    test "get_emoji!/1 returns the emoji with given id" do
+      emoji = emoji_fixture()
+      assert Media.get_emoji!(emoji.id) == emoji
+    end
+
+    test "create_emoji/1 with valid data creates a emoji" do
+      language = language_fixture(%{name: "English"})
+      category = category_fixture(%{name: "Movies"})
+
+      valid_attrs =
+        Enum.into(@valid_attrs, %{
+          language_id: language.id,
+          category_id: category.id
+        })
+
+      assert {:ok, %Emoji{} = emoji} = Media.create_emoji(valid_attrs)
+      assert emoji.content == @valid_attrs.content
+      assert emoji.decoded_content == @valid_attrs.decoded_content
+      assert emoji.tip == @valid_attrs.tip
+      assert emoji.language_id == language.id
+      assert emoji.category_id == category.id
+    end
+
+    test "create_emoji/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Media.create_emoji(@invalid_attrs)
+    end
+
+    test "update_emoji/2 with valid data updates the emoji" do
+      emoji = emoji_fixture()
+
+      language = language_fixture(%{name: "Portuguese"})
+      category = category_fixture(%{name: "Films"})
+
+      update_attrs =
+        Enum.into(@update_attrs, %{
+          language_id: language.id,
+          category_id: category.id
+        })
+
+      assert {:ok, %Emoji{} = emoji} = Media.update_emoji(emoji, update_attrs)
+      assert emoji.content == @update_attrs.content
+      assert emoji.decoded_content == @update_attrs.decoded_content
+      assert emoji.tip == @update_attrs.tip
+      assert emoji.language_id == language.id
+      assert emoji.category_id == category.id
+    end
+
+    test "update_emoji/2 with invalid data returns error changeset" do
+      emoji = emoji_fixture()
+      assert {:error, %Ecto.Changeset{}} = Media.update_emoji(emoji, @invalid_attrs)
+      assert emoji == Media.get_emoji!(emoji.id)
+    end
+
+    test "delete_emoji/1 deletes the emoji" do
+      emoji = emoji_fixture()
+      assert {:ok, %Emoji{}} = Media.delete_emoji(emoji)
+      assert_raise Ecto.NoResultsError, fn -> Media.get_emoji!(emoji.id) end
+    end
+
+    test "change_emoji/1 returns a emoji changeset" do
+      emoji = emoji_fixture()
+      assert %Ecto.Changeset{} = Media.change_emoji(emoji)
+    end
+  end
 end
