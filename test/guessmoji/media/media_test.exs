@@ -15,10 +15,10 @@ defmodule Guessmoji.MediaTest do
       assert Media.get_language!(language.id) == language
     end
 
-    test "get_language_by!/1 returns the language with the given fields" do
+    test "get_language_by/1 returns the language with the given fields" do
       fields = language_valid_attrs()
       language = language_fixture(fields)
-      assert Media.get_language_by!(fields) == language
+      assert Media.get_language_by(fields) == language
     end
 
     test "create_language/1 with valid data creates a language" do
@@ -81,10 +81,10 @@ defmodule Guessmoji.MediaTest do
       assert Media.get_category!(category.id) == category
     end
 
-    test "get_category_by!/1 returns the category with the given fields" do
+    test "get_category_by/1 returns the category with the given fields" do
       fields = category_valid_attrs()
       category = category_fixture(fields)
-      assert Media.get_category_by!(fields) == category
+      assert Media.get_category_by(fields) == category
     end
 
     test "create_category/1 with valid data creates a category" do

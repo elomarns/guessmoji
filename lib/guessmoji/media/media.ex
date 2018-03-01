@@ -10,7 +10,7 @@ defmodule Guessmoji.Media do
 
   def get_language!(id), do: Repo.get!(Language, id)
 
-  def get_language_by!(fields), do: Repo.get_by!(Language, fields)
+  def get_language_by(fields), do: Repo.get_by(Language, fields)
 
   def create_language(attrs \\ %{}) do
     %Language{}
@@ -40,7 +40,7 @@ defmodule Guessmoji.Media do
 
   def get_category!(id), do: Repo.get!(Category, id)
 
-  def get_category_by!(fields), do: Repo.get_by!(Category, fields)
+  def get_category_by(fields), do: Repo.get_by(Category, fields)
 
   def create_category(attrs \\ %{}) do
     %Category{}

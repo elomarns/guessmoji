@@ -29,7 +29,7 @@ defmodule GuessmojiWeb.EmojiController do
   defp add_default_language_id_to_params(conn, _opts) do
     put_in(
       conn.params["emoji"]["language_id"],
-      Media.get_language_by!(%{name: @default_language}).id
+      Media.get_language_by(%{name: @default_language}).id
     )
   end
 
@@ -38,7 +38,7 @@ defmodule GuessmojiWeb.EmojiController do
   defp add_default_category_id_to_params(conn, _opts) do
     put_in(
       conn.params["emoji"]["category_id"],
-      Media.get_category_by!(%{name: @default_category}).id
+      Media.get_category_by(%{name: @default_category}).id
     )
   end
 end
