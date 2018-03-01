@@ -20,19 +20,20 @@ defmodule GuessmojiWeb.ConnCase do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
       import GuessmojiWeb.Router.Helpers
+      import Guessmoji.Fixtures
 
       # The default endpoint for testing
       @endpoint GuessmojiWeb.Endpoint
     end
   end
 
-
   setup tags do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Guessmoji.Repo)
+
     unless tags[:async] do
       Ecto.Adapters.SQL.Sandbox.mode(Guessmoji.Repo, {:shared, self()})
     end
+
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
-
 end
