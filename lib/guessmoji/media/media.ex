@@ -89,4 +89,32 @@ defmodule Guessmoji.Media do
   def change_emoji(%Emoji{} = emoji) do
     Emoji.changeset(emoji, %{})
   end
+
+  alias Guessmoji.Media.Guess
+
+  def list_guesses do
+    Repo.all(Guess)
+  end
+
+  def get_guess!(id), do: Repo.get!(Guess, id)
+
+  def create_guess(attrs \\ %{}) do
+    %Guess{}
+    |> Guess.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def update_guess(%Guess{} = guess, attrs) do
+    guess
+    |> Guess.changeset(attrs)
+    |> Repo.update()
+  end
+
+  def delete_guess(%Guess{} = guess) do
+    Repo.delete(guess)
+  end
+
+  def change_guess(%Guess{} = guess) do
+    Guess.changeset(guess, %{})
+  end
 end

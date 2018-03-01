@@ -189,4 +189,54 @@ defmodule Guessmoji.MediaTest do
       assert %Ecto.Changeset{} = Media.change_emoji(emoji)
     end
   end
+
+  describe "guesses" do
+    alias Guessmoji.Media.Guess
+
+    test "list_guesses/0 returns all guesses" do
+      guess = guess_fixture()
+      assert Media.list_guesses() == [guess]
+    end
+
+    test "get_guess!/1 returns the guess with given id" do
+      guess = guess_fixture()
+      assert Media.get_guess!(guess.id) == guess
+    end
+
+    test "create_guess/1 with valid data creates a guess" do
+      valid_attrs = guess_valid_attrs()
+      assert {:ok, %Guess{} = guess} = Media.create_guess(valid_attrs)
+      assert guess.emoji_id == valid_attrs.emoji_id
+      assert guess.content == valid_attrs.content
+    end
+
+    test "create_guess/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Media.create_guess(guess_invalid_attrs())
+    end
+
+    test "update_guess/2 with valid data updates the guess" do
+      guess = guess_fixture()
+      update_attrs = guess_update_attrs()
+      assert {:ok, %Guess{} = guess} = Media.update_guess(guess, update_attrs)
+      assert guess.emoji_id == update_attrs.emoji_id
+      assert guess.content == update_attrs.content
+    end
+
+    test "update_guess/2 with invalid data returns error changeset" do
+      guess = guess_fixture()
+      assert {:error, %Ecto.Changeset{}} = Media.update_guess(guess, guess_invalid_attrs())
+      assert guess == Media.get_guess!(guess.id)
+    end
+
+    test "delete_guess/1 deletes the guess" do
+      guess = guess_fixture()
+      assert {:ok, %Guess{}} = Media.delete_guess(guess)
+      assert_raise Ecto.NoResultsError, fn -> Media.get_guess!(guess.id) end
+    end
+
+    test "change_guess/1 returns a guess changeset" do
+      guess = guess_fixture()
+      assert %Ecto.Changeset{} = Media.change_guess(guess)
+    end
+  end
 end

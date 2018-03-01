@@ -28,22 +28,32 @@ defmodule Guessmoji.Fixtures do
   end
 
   def emoji_valid_attrs do
+    language_fields = %{name: "English"}
+    category_fields = %{name: "Movies"}
+
     %{
       content: "⭐🔫👻🔪",
       decoded_content: "Star Wars: Episode I – The Phantom Menace",
       tip: nil,
-      language_id: language_fixture(%{name: "English"}).id,
-      category_id: category_fixture(%{name: "Movies"}).id
+      language_id:
+        (Media.get_language_by(language_fields) || language_fixture(language_fields)).id,
+      category_id:
+        (Media.get_category_by(category_fields) || category_fixture(category_fields)).id
     }
   end
 
   def emoji_update_attrs do
+    language_fields = %{name: "English (UK)"}
+    category_fields = %{name: "Pixar Movies"}
+
     %{
       content: "🆙",
       decoded_content: "Up",
       tip: "This movie has the best introduction scene ever!",
-      language_id: language_fixture(%{name: "English (UK)"}).id,
-      category_id: category_fixture(%{name: "Pixar Movies"}).id
+      language_id:
+        (Media.get_language_by(language_fields) || language_fixture(language_fields)).id,
+      category_id:
+        (Media.get_category_by(category_fields) || category_fixture(category_fields)).id
     }
   end
 
@@ -64,5 +74,26 @@ defmodule Guessmoji.Fixtures do
       |> Media.create_emoji()
 
     emoji
+  end
+
+  def guess_valid_attrs do
+    %{emoji_id: emoji_fixture().id, content: "Star Wars: Episode I – The Phantom Menace"}
+  end
+
+  def guess_update_attrs do
+    %{emoji_id: emoji_fixture(emoji_update_attrs()).id, content: "That Balloon Movie"}
+  end
+
+  def guess_invalid_attrs do
+    %{emoji_id: nil, content: nil}
+  end
+
+  def guess_fixture(attrs \\ %{}) do
+    {:ok, guess} =
+      attrs
+      |> Enum.into(guess_valid_attrs())
+      |> Media.create_guess()
+
+    guess
   end
 end
