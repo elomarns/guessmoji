@@ -17,7 +17,7 @@ defmodule GuessmojiWeb.Router do
     # Use the default browser stack
     pipe_through(:browser)
 
-    get("/", PageController, :index)
+    get("/", EmojiController, :new)
     resources("/emojis", EmojiController, only: [:new, :create])
   end
 
