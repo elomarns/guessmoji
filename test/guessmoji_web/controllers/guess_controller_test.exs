@@ -1,9 +1,13 @@
 defmodule GuesmojiWeb.GuessControllerTest do
   use GuessmojiWeb.ConnCase
 
-  setup %{conn: conn} do
-    emoji = emoji_fixture()
-    {:ok, conn: conn, emoji: emoji}
+  setup %{conn: conn} = config do
+    if config[:without_emojis] do
+      {:ok, conn: conn}
+    else
+      emoji = emoji_fixture()
+      {:ok, conn: conn, emoji: emoji}
+    end
   end
 
   describe "new guess" do
@@ -20,6 +24,12 @@ defmodule GuesmojiWeb.GuessControllerTest do
     test "renders form with a random emoji", %{conn: conn} do
       conn = get(conn, guess_path(conn, :new))
       assert html_response(conn, 200) =~ "New Guess"
+    end
+
+    @tag :without_emojis
+    test "redirects to new emoji if there's no emoji", %{conn: conn} do
+      conn = get(conn, guess_path(conn, :new))
+      assert redirected_to(conn) == emoji_path(conn, :new)
     end
   end
 
