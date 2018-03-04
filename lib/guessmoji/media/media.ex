@@ -70,6 +70,10 @@ defmodule Guessmoji.Media do
 
   def get_emoji!(id), do: Repo.get!(Emoji, id)
 
+  def get_random_emoji do
+    Repo.one(Emoji.random())
+  end
+
   def create_emoji(attrs \\ %{}) do
     %Emoji{}
     |> Emoji.changeset(attrs)

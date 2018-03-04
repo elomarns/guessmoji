@@ -1,5 +1,6 @@
 defmodule Guessmoji.Media.Emoji do
   use Ecto.Schema
+  import Ecto.Query
   import Ecto.Changeset
   alias Guessmoji.Media.{Language, Category, Emoji}
 
@@ -18,5 +19,9 @@ defmodule Guessmoji.Media.Emoji do
     emoji
     |> cast(attrs, [:content, :decoded_content, :tip, :language_id, :category_id])
     |> validate_required([:content, :decoded_content, :language_id, :category_id])
+  end
+
+  def random do
+    from(e in Emoji, order_by: fragment("random()"), limit: 1)
   end
 end

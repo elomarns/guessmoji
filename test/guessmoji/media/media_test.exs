@@ -147,6 +147,14 @@ defmodule Guessmoji.MediaTest do
       assert Media.get_emoji!(emoji.id) == emoji
     end
 
+    test "get_random_emoji/0 returns a random emoji" do
+      emoji = emoji_fixture(emoji_valid_attrs())
+      assert Media.get_random_emoji() == emoji
+
+      another_emoji = emoji_fixture(emoji_update_attrs())
+      assert Media.get_random_emoji() in [emoji, another_emoji]
+    end
+
     test "create_emoji/1 with valid data creates a emoji" do
       valid_attrs = emoji_valid_attrs()
       assert {:ok, %Emoji{} = emoji} = Media.create_emoji(valid_attrs)

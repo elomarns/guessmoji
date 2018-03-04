@@ -29,6 +29,11 @@ defmodule GuessmojiWeb.GuessController do
     assign(conn, :emoji, emoji)
   end
 
+  defp add_emoji_to_assigns(conn, _opts) do
+    emoji = Media.get_random_emoji()
+    assign(conn, :emoji, emoji)
+  end
+
   defp add_emoji_id_to_params(conn, _opts) do
     put_in(
       conn.params["guess"]["emoji_id"],

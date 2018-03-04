@@ -16,6 +16,11 @@ defmodule GuesmojiWeb.GuessControllerTest do
       conn = get(conn, emoji_guess_path(conn, :new, emoji))
       assert html_response(conn, 200) =~ "New Guess"
     end
+
+    test "renders form with a random emoji", %{conn: conn} do
+      conn = get(conn, guess_path(conn, :new))
+      assert html_response(conn, 200) =~ "New Guess"
+    end
   end
 
   describe "create guess" do
