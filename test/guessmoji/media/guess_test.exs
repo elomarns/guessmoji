@@ -1,5 +1,5 @@
 defmodule Guessmoji.Media.GuessTest do
-  use Guessmoji.DataCase
+  use Guessmoji.DataCase, async: true
   alias Guessmoji.Media.Guess
 
   test "changeset with valid attributes" do

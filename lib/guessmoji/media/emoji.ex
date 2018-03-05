@@ -1,7 +1,6 @@
 defmodule Guessmoji.Media.Emoji do
   use Ecto.Schema
-  import Ecto.Query
-  import Ecto.Changeset
+  import Ecto.{Query, Changeset}
   import Guessmoji.ChangesetChangesTrimmer
   alias Guessmoji.Media.{Language, Category, Emoji}
 
