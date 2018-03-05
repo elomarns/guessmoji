@@ -1,6 +1,7 @@
 defmodule Guessmoji.Media.Guess do
   use Ecto.Schema
   import Ecto.Changeset
+  import Guessmoji.ChangesetChangesTrimmer
   alias Guessmoji.Media.{Emoji, Guess}
 
   schema "guesses" do
@@ -15,5 +16,6 @@ defmodule Guessmoji.Media.Guess do
     guess
     |> cast(attrs, [:content, :emoji_id])
     |> validate_required([:content])
+    |> trim(:content)
   end
 end

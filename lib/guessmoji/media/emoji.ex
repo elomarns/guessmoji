@@ -2,6 +2,7 @@ defmodule Guessmoji.Media.Emoji do
   use Ecto.Schema
   import Ecto.Query
   import Ecto.Changeset
+  import Guessmoji.ChangesetChangesTrimmer
   alias Guessmoji.Media.{Language, Category, Emoji}
 
   schema "emojis" do
@@ -19,6 +20,7 @@ defmodule Guessmoji.Media.Emoji do
     emoji
     |> cast(attrs, [:content, :decoded_content, :tip, :language_id, :category_id])
     |> validate_required([:content, :decoded_content, :language_id, :category_id])
+    |> trim(:decoded_content)
   end
 
   def random do

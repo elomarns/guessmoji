@@ -31,4 +31,17 @@ defmodule Guessmoji.Media.EmojiTest do
     changeset = Emoji.changeset(%Emoji{}, Map.put(emoji_valid_attrs(), :category_id, nil))
     assert %{category_id: ["can't be blank"]} = errors_on(changeset)
   end
+
+  test "changeset removes all leading and trailing whitespace on decoded content" do
+    valid_attrs =
+      Map.put(
+        emoji_valid_attrs(),
+        :decoded_content,
+        "  Star Wars: Episode I – The Phantom Menace  "
+      )
+
+    changeset = Emoji.changeset(%Emoji{}, valid_attrs)
+    decoded_content = get_change(changeset, :decoded_content)
+    assert decoded_content == "Star Wars: Episode I – The Phantom Menace"
+  end
 end
