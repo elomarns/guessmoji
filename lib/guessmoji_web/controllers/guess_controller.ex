@@ -16,15 +16,18 @@ defmodule GuessmojiWeb.GuessController do
 
   def create(conn, %{"guess" => guess_params}) do
     case Media.create_guess(guess_params) do
-      {:ok, _guess} ->
+      {:ok, guess} ->
         conn
-        |> put_flash(:info, "Guess created successfully.")
+        |> put_flash(:info, guess_feedback(guess))
         |> redirect(to: emoji_guess_path(conn, :new, conn.assigns.emoji))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
   end
+
+  defp guess_feedback(%Guess{correct: true}), do: "Your guess is right!"
+  defp guess_feedback(%Guess{correct: false}), do: "Your guess is wrong!"
 
   defp add_emoji_to_assigns(%Conn{params: %{"emoji_id" => emoji_id}} = conn, _opts) do
     emoji = Media.get_emoji!(emoji_id)
