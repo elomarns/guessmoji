@@ -40,7 +40,7 @@ defmodule GuessmojiWeb.EmojiControllerTest do
 
     test "redirects to new guess when data is valid", %{conn: conn} do
       valid_attrs = %{
-        content: "🐒👑",
+        content: "👑🐒",
         decoded_content: "King Kong"
       }
 

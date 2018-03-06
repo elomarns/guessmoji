@@ -47,7 +47,7 @@ defmodule Guessmoji.Fixtures do
     category_fields = %{name: "Pixar Movies"}
 
     %{
-      content: "🆙",
+      content: "⬆️",
       decoded_content: "Up",
       tip: "This movie has the best introduction scene ever!",
       language_id:
