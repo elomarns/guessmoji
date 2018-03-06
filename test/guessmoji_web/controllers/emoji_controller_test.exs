@@ -38,14 +38,15 @@ defmodule GuessmojiWeb.EmojiControllerTest do
       assert @default_category == Media.get_category!(category_id).name
     end
 
-    test "redirects to new when data is valid", %{conn: conn} do
+    test "redirects to new guess when data is valid", %{conn: conn} do
       valid_attrs = %{
         content: "🐒👑",
         decoded_content: "King Kong"
       }
 
       conn = post(conn, emoji_path(conn, :create), emoji: valid_attrs)
-      assert redirected_to(conn) == emoji_path(conn, :new)
+      assert %{emoji_id: emoji_id} = redirected_params(conn)
+      assert redirected_to(conn) == emoji_guess_path(conn, :new, emoji_id)
     end
 
     test "renders errors when data is invalid", %{conn: conn} do

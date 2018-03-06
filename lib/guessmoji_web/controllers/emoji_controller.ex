@@ -14,10 +14,10 @@ defmodule GuessmojiWeb.EmojiController do
 
   def create(conn, %{"emoji" => emoji_params}) do
     case Media.create_emoji(emoji_params) do
-      {:ok, _emoji} ->
+      {:ok, emoji} ->
         conn
         |> put_flash(:info, "Emoji created successfully.")
-        |> redirect(to: emoji_path(conn, :new))
+        |> redirect(to: emoji_guess_path(conn, :new, emoji))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
