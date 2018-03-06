@@ -1,5 +1,5 @@
 defmodule Guessmoji.Media.GuessTest do
-  use Guessmoji.DataCase, async: true
+  use Guessmoji.DataCase
   alias Guessmoji.Media.Guess
 
   test "changeset with valid attributes" do
@@ -28,5 +28,15 @@ defmodule Guessmoji.Media.GuessTest do
     changeset = Guess.changeset(%Guess{}, valid_attrs)
     content = get_change(changeset, :content)
     assert content == "Star Wars: Episode I – The Phantom Menace"
+  end
+
+  test "changeset fills the correct field according to the guess" do
+    changeset = Guess.changeset(%Guess{}, guess_valid_attrs())
+    is_correct = get_change(changeset, :correct)
+    assert is_correct
+
+    changeset = Guess.changeset(%Guess{}, guess_update_attrs())
+    is_correct = get_change(changeset, :correct)
+    refute is_correct
   end
 end

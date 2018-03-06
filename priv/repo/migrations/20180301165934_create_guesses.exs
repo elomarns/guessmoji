@@ -4,6 +4,7 @@ defmodule Guessmoji.Repo.Migrations.CreateGuesses do
   def change do
     create table(:guesses) do
       add(:content, :string)
+      add(:correct, :boolean)
       add(:emoji_id, references(:emojis, on_delete: :delete_all))
 
       timestamps()

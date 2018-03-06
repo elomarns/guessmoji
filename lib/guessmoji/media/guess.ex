@@ -2,10 +2,12 @@ defmodule Guessmoji.Media.Guess do
   use Ecto.Schema
   import Ecto.Changeset
   import Guessmoji.ChangesetChangesTrimmer
+  alias Guessmoji.Media
   alias Guessmoji.Media.{Emoji, Guess}
 
   schema "guesses" do
     field(:content, :string)
+    field(:correct, :boolean)
 
     belongs_to(:emoji, Emoji)
 
@@ -17,5 +19,20 @@ defmodule Guessmoji.Media.Guess do
     |> cast(attrs, [:content, :emoji_id])
     |> validate_required([:content])
     |> trim(:content)
+    |> put_correct()
+  end
+
+  def put_correct(%Ecto.Changeset{valid?: true, changes: %{content: _content}} = changeset) do
+    guess = struct(Guess, changeset.changes)
+    emoji = Media.get_emoji!(guess.emoji_id)
+    put_change(changeset, :correct, correct?(guess, emoji))
+  end
+
+  def put_correct(%Ecto.Changeset{} = changeset) do
+    changeset
+  end
+
+  defp correct?(%Guess{} = guess, %Emoji{} = emoji) do
+    String.downcase(guess.content) == String.downcase(emoji.decoded_content)
   end
 end
