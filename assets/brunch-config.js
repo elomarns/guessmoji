@@ -20,7 +20,10 @@ exports.config = {
       // }
     },
     stylesheets: {
-      joinTo: "css/app.css"
+      joinTo: "css/app.css",
+      order: {
+        after: ["css/app.css"] // Concat app.css last.
+      }
     },
     templates: {
       joinTo: "js/app.js"
@@ -47,6 +50,13 @@ exports.config = {
     babel: {
       // Do not use ES6 compiler in vendor code
       ignore: [/vendor/]
+    },
+
+    sass: {
+      options: {
+        includePaths: ["node_modules/bootstrap/scss"],
+        precision: 8 // Minimum precision required by Bootstrap.
+      }
     }
   },
 
@@ -60,7 +70,8 @@ exports.config = {
     enabled: true,
     globals: {
       $: 'jquery',
-      jQuery: 'jquery'
+      jQuery: 'jquery',
+      bootstrap: 'bootstrap'
     }
   }
 };
