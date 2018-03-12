@@ -1,3 +1,5 @@
-<h2>New Guess</h2>
+<div class="border p-3">
+  <h2>New Guess</h2>
 
-<%= render "form.html", Map.put(assigns, :action, emoji_guess_path(@conn, :create, @emoji)) %>
+  <%= render "form.html", Map.put(assigns, :action, emoji_guess_path(@conn, :create, @emoji)) %>
+</div>

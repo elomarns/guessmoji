@@ -49,3 +49,16 @@
     border-bottom: 0;
   }
 }
+
+.error.message {
+  color: $danger;
+  display: inline-block;
+}
+
+.error.message::first-letter {
+  text-transform: uppercase;
+}
+
+.alert p {
+  margin: 0;
+}
