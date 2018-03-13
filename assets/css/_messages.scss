@@ -1,0 +1,18 @@
+/* Phoenix flash messages */
+.alert:empty {
+  display: none;
+}
+
+.alert p {
+  margin: 0;
+}
+
+/* Form error messages */
+.error.message {
+  color: $danger;
+  display: inline-block;
+}
+
+.error.message::first-letter {
+  text-transform: uppercase;
+}
