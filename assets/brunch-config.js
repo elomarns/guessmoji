@@ -54,7 +54,7 @@ exports.config = {
 
     sass: {
       options: {
-        includePaths: ["node_modules/bootstrap/scss"],
+        includePaths: ["node_modules/bootstrap/scss", "node_modules/emojionearea/dist"],
         precision: 8 // Minimum precision required by Bootstrap.
       }
     }
@@ -72,6 +72,7 @@ exports.config = {
       $: 'jquery',
       jQuery: 'jquery',
       bootstrap: 'bootstrap'
-    }
+    },
+    static: ["node_modules/emojionearea/dist/emojionearea.js"]
   }
 };
