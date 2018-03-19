@@ -9,8 +9,8 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="main-menu">
-      <ul class="navbar-nav ml-auto">
+    <div class="row collapse navbar-collapse justify-content-end" id="main-menu">
+      <ul class="navbar-nav">
         <li class="nav-item">
           <%= link "Add your own emoji", to: emoji_path(@conn, :new),
             class: "nav-link" %>
