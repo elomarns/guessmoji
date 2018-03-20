@@ -8,11 +8,6 @@
 }
 
 /* Form error messages */
-.error.message {
-  color: $danger;
-  display: inline-block;
-}
-
-.error.message::first-letter {
+.invalid-feedback::first-letter {
   text-transform: uppercase;
 }

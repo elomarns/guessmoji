@@ -28,8 +28,9 @@ defmodule GuessmojiWeb do
 
   def view do
     quote do
-      use Phoenix.View, root: "lib/guessmoji_web/templates",
-                        namespace: GuessmojiWeb
+      use Phoenix.View,
+        root: "lib/guessmoji_web/templates",
+        namespace: GuessmojiWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 2, view_module: 1]
@@ -38,6 +39,7 @@ defmodule GuessmojiWeb do
       use Phoenix.HTML
 
       import GuessmojiWeb.Router.Helpers
+      import GuessmojiWeb.FormHelpers
       import GuessmojiWeb.ErrorHelpers
       import GuessmojiWeb.Gettext
     end
