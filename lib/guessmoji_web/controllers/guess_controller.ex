@@ -18,7 +18,7 @@ defmodule GuessmojiWeb.GuessController do
     case Media.create_guess(guess_params) do
       {:ok, guess} ->
         conn
-        |> put_flash(:info, guess_feedback(guess))
+        |> put_flash_for_guess(guess)
         |> redirect(to: emoji_guess_path(conn, :new, conn.assigns.emoji))
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -26,8 +26,13 @@ defmodule GuessmojiWeb.GuessController do
     end
   end
 
-  defp guess_feedback(%Guess{correct: true}), do: "Your guess is right!"
-  defp guess_feedback(%Guess{correct: false}), do: "Your guess is wrong!"
+  defp put_flash_for_guess(conn, %Guess{correct: true}) do
+    put_flash(conn, :info, "Your guess is right!")
+  end
+
+  defp put_flash_for_guess(conn, %Guess{correct: false}) do
+    put_flash(conn, :error, "Your guess is wrong!")
+  end
 
   defp add_emoji_to_assigns(%Conn{params: %{"emoji_id" => emoji_id}} = conn, _opts) do
     emoji = Media.get_emoji!(emoji_id)
