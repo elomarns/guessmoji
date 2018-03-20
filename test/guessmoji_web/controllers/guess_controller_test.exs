@@ -18,12 +18,12 @@ defmodule GuesmojiWeb.GuessControllerTest do
 
     test "renders form", %{conn: conn, emoji: emoji} do
       conn = get(conn, emoji_guess_path(conn, :new, emoji))
-      assert html_response(conn, 200) =~ "New Guess"
+      assert html_response(conn, 200) =~ "Take your guess"
     end
 
     test "renders form with a random emoji", %{conn: conn} do
       conn = get(conn, guess_path(conn, :new))
-      assert html_response(conn, 200) =~ "New Guess"
+      assert html_response(conn, 200) =~ "Take your guess"
     end
 
     @tag :without_emojis
@@ -58,7 +58,7 @@ defmodule GuesmojiWeb.GuessControllerTest do
 
     test "renders errors when data is invalid", %{conn: conn, emoji: emoji} do
       conn = post(conn, emoji_guess_path(conn, :create, emoji), guess: guess_invalid_attrs())
-      assert html_response(conn, 200) =~ "New Guess"
+      assert html_response(conn, 200) =~ "Take your guess"
     end
   end
 end
