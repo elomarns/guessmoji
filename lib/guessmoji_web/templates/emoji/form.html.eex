@@ -1,29 +1,24 @@
 <%= form_for @changeset, @action, fn f -> %>
-  <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
-    </div>
-  <% end %>
-
   <div class="form-group">
-    <%= label f, :content, class: "control-label" %>
-    <%= text_input f, :content, class: "form-control" %>
+    <%= label f, :content, "Emoji", class: "control-label" %>
+    <%= text_input_with_errors @changeset, f, :content, autofocus: :autofocus,
+      placeholder: "Type \":\" to autocomplete" %>
     <%= error_tag f, :content %>
   </div>
 
   <div class="form-group">
-    <%= label f, :decoded_content, class: "control-label" %>
-    <%= text_input f, :decoded_content, class: "form-control" %>
+    <%= label f, :decoded_content, "Movie", class: "control-label" %>
+    <%= text_input_with_errors @changeset, f, :decoded_content %>
     <%= error_tag f, :decoded_content %>
   </div>
 
   <div class="form-group">
     <%= label f, :tip, class: "control-label" %>
-    <%= textarea f, :tip, class: "form-control" %>
+    <%= textarea_with_errors @changeset, f, :tip %>
     <%= error_tag f, :tip %>
   </div>
 
-  <div class="form-group">
-    <%= submit "Submit", class: "btn btn-primary" %>
+  <div class="form-group mb-0">
+     <%= submit "Submit", class: "btn btn-primary" %>
   </div>
 <% end %>

@@ -10,6 +10,14 @@ defmodule GuessmojiWeb.FormHelpers do
     )
   end
 
+  def textarea_with_errors(%Changeset{} = changeset, form, field, opts \\ []) do
+    textarea(
+      form,
+      field,
+      Keyword.merge(opts, class: input_classes(changeset, field))
+    )
+  end
+
   defp input_classes(%Changeset{action: nil}, _field) do
     "form-control"
   end

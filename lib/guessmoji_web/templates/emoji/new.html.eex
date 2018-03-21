@@ -1,5 +1,9 @@
-<div class="border p-3">
-  <h2>New Emoji</h2>
+<div class="card">
+  <div class="card-header">
+    New Emoji
+  </div>
 
-  <%= render "form.html", Map.put(assigns, :action, emoji_path(@conn, :create)) %>
+  <div class="card-body">
+    <%= render "form.html", Map.put(assigns, :action, emoji_path(@conn, :create)) %>
+  </div>
 </div>
