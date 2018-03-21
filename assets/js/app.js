@@ -20,4 +20,4 @@ import "phoenix_html"
 
 // import socket from "./socket"
 import { activateEmojiPicker } from "./emoji_form"
-activateEmojiPicker()
+activateEmojiPicker('#emoji_content')

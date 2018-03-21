@@ -1,19 +1,28 @@
-export function activateEmojiPicker() {
-  $(document).ready(function() {
-    $('#emoji_content').emojioneArea({
+export function activateEmojiPicker(inputSelector) {
+  if($(inputSelector).length > 0) {
+    addEmojiPicker(inputSelector)
+    removeAnythingOtherThanEmojisFromInput(inputSelector)
+  }
+}
+
+function addEmojiPicker(inputSelector) {
+  $(document).ready(() => {
+    $(inputSelector).emojioneArea({
       pickerPosition: "right",
       searchPlaceholder: 'Search',
       shortcuts: false
-    });
-  });
+    })
+  })
+}
 
-  $(document).on('focusout', '.emojionearea-editor', function() {
+function removeAnythingOtherThanEmojisFromInput(inputSelector) {
+  $(inputSelector).parent().on('focusout', '.emojionearea-editor', function() {
     $(this).contents().filter(function() {
-      return this.nodeType === 3
+      return this.nodeType == 3
     }).remove()
   })
 
-  $(document).on('change', '#emoji_content', function() {
+  $(document).on('change', inputSelector, function() {
     const content = $(this).val()
     const newContent = content.replace(/\w+/gi, '')
 
