@@ -21,3 +21,6 @@ import "phoenix_html"
 // import socket from "./socket"
 import { activateEmojiPicker } from "./emoji_form"
 activateEmojiPicker('#emoji_content')
+
+import { showEmojiContentUsingEmojiOneImages } from "./guess_form"
+showEmojiContentUsingEmojiOneImages('label[for="guess_content"]')

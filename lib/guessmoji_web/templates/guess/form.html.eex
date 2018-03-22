@@ -1,6 +1,10 @@
 <%= form_for @changeset, @action, fn f -> %>
   <div class="form-group">
-    <%= label f, :content, guess_content_label(@emoji), class: "control-label" %>
+    <%= label f, :content, class: "control-label", "data-emoji-content": @emoji.content do %>
+      What movie
+      <%= content_tag :span, @emoji.content, class: :guess_emoji_content %>
+      represents?
+    <% end %>
     <%= text_input_with_errors @changeset, f, :content, autofocus: :autofocus %>
     <%= error_tag f, :content %>
   </div>
