@@ -49,7 +49,7 @@ defmodule GuesmojiWeb.GuessControllerTest do
     test "adds a feedback message on flash", %{conn: conn, emoji: emoji} do
       valid_attrs = %{content: "Star Wars"}
       conn = post(conn, emoji_guess_path(conn, :create, emoji), guess: valid_attrs)
-      assert get_flash(conn, :info) == "Your guess is wrong!"
+      assert get_flash(conn, :error) == "Your guess is wrong!"
 
       valid_attrs = %{content: "Star Wars: Episode I – The Phantom Menace"}
       conn = post(conn, emoji_guess_path(conn, :create, emoji), guess: valid_attrs)
