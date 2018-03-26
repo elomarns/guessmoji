@@ -6,7 +6,7 @@ defmodule GuessmojiWeb.GuessController do
   alias Guessmoji.Media.Guess
 
   plug(:add_emoji_to_assigns when action in [:new, :create])
-  plug(:redirect_to_new_emoji_if_there_is_no_emoji)
+  plug(:redirect_to_new_if_there_is_no_emoji)
   plug(:add_emoji_id_to_params when action in [:create])
 
   def new(conn, _params) do
@@ -44,14 +44,14 @@ defmodule GuessmojiWeb.GuessController do
     assign(conn, :emoji, emoji)
   end
 
-  def redirect_to_new_emoji_if_there_is_no_emoji(%Conn{assigns: %{emoji: nil}} = conn, _opts) do
+  def redirect_to_new_if_there_is_no_emoji(%Conn{assigns: %{emoji: nil}} = conn, _opts) do
     conn
     |> put_flash(:error, "There's no emoji to guess.")
     |> redirect(to: emoji_path(conn, :new))
     |> halt()
   end
 
-  def redirect_to_new_emoji_if_there_is_no_emoji(%Conn{assigns: %{emoji: _emoji}} = conn, _opts) do
+  def redirect_to_new_if_there_is_no_emoji(%Conn{assigns: %{emoji: _emoji}} = conn, _opts) do
     conn
   end
 
