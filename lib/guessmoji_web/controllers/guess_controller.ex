@@ -19,7 +19,7 @@ defmodule GuessmojiWeb.GuessController do
       {:ok, guess} ->
         conn
         |> put_flash_for_guess(guess)
-        |> redirect(to: emoji_guess_path(conn, :new, conn.assigns.emoji))
+        |> render_new_or_redirect_for_guess(guess)
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -32,6 +32,14 @@ defmodule GuessmojiWeb.GuessController do
 
   defp put_flash_for_guess(conn, %Guess{correct: false}) do
     put_flash(conn, :error, "Your guess is wrong!")
+  end
+
+  defp render_new_or_redirect_for_guess(conn, %Guess{correct: true}) do
+    redirect(conn, to: guess_path(conn, :new))
+  end
+
+  defp render_new_or_redirect_for_guess(conn, %Guess{correct: false}) do
+    new(conn, %{})
   end
 
   defp add_emoji_to_assigns(%Conn{params: %{"emoji_id" => emoji_id}} = conn, _opts) do

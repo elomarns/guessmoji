@@ -40,12 +40,6 @@ defmodule GuesmojiWeb.GuessControllerTest do
       assert emoji_id == emoji.id
     end
 
-    test "redirects to new when data is valid", %{conn: conn, emoji: emoji} do
-      valid_attrs = %{content: "Star Wars"}
-      conn = post(conn, emoji_guess_path(conn, :create, emoji), guess: valid_attrs)
-      assert redirected_to(conn) == emoji_guess_path(conn, :new, emoji)
-    end
-
     test "adds a feedback message on flash", %{conn: conn, emoji: emoji} do
       valid_attrs = %{content: "Star Wars"}
       conn = post(conn, emoji_guess_path(conn, :create, emoji), guess: valid_attrs)
@@ -54,6 +48,18 @@ defmodule GuesmojiWeb.GuessControllerTest do
       valid_attrs = %{content: "Star Wars: Episode I – The Phantom Menace"}
       conn = post(conn, emoji_guess_path(conn, :create, emoji), guess: valid_attrs)
       assert get_flash(conn, :info) == "Your guess is right!"
+    end
+
+    test "renders new when data is valid and the guess is wrong", %{conn: conn, emoji: emoji} do
+      valid_attrs = %{content: "Star Wars"}
+      conn = post(conn, emoji_guess_path(conn, :create, emoji), guess: valid_attrs)
+      assert html_response(conn, 200) =~ "Take your guess"
+    end
+
+    test "redirects to new when data is valid and the guess is right", %{conn: conn, emoji: emoji} do
+      valid_attrs = %{content: "Star Wars: Episode I – The Phantom Menace"}
+      conn = post(conn, emoji_guess_path(conn, :create, emoji), guess: valid_attrs)
+      assert redirected_to(conn) == guess_path(conn, :new)
     end
 
     test "renders errors when data is invalid", %{conn: conn, emoji: emoji} do
