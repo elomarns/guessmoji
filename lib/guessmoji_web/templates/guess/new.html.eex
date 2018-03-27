@@ -6,4 +6,8 @@
   <div class="card-body">
     <%= render "form.html", Map.put(assigns, :action, emoji_guess_path(@conn, :create, @emoji)) %>
   </div>
+
+  <div class="card-footer">
+    <%= link "This is hard, give me another one", to: guess_path(@conn, :new) %>
+  </div>
 </div>
