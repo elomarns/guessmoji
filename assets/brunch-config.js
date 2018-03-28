@@ -73,6 +73,6 @@ exports.config = {
       jQuery: 'jquery',
       bootstrap: 'bootstrap'
     },
-    static: ["node_modules/emojionearea/dist/emojionearea.js"]
+    static: []
   }
 };

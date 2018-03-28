@@ -6,6 +6,8 @@ export function activateEmojiPicker(inputSelector) {
 }
 
 function addEmojiPicker(inputSelector) {
+  require('emojionearea')
+
   $(document).ready(() => {
     $(inputSelector).emojioneArea({
       pickerPosition: "right",
