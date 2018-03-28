@@ -1,0 +1,15 @@
+<div class="jumbotron border">
+  <h1 class="display-4">
+    Guess the movie from the emoji!
+  </h1>
+
+  <p class="lead">
+    That's all this website is about! I show you an emoji, and you tell me which
+    movie it represents!
+  </p>
+
+  <p class="lead">
+    <%= link "Let me try!", to: guess_path(@conn, :new),
+      class: "btn btn-primary btn-lg" %>
+  </p>
+</div>
