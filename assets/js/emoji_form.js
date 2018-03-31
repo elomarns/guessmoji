@@ -1,7 +1,6 @@
 export function activateEmojiPicker(inputSelector) {
   if($(inputSelector).length > 0) {
     addEmojiPicker(inputSelector)
-    removeAnythingOtherThanEmojisFromInput(inputSelector)
   }
 }
 
@@ -18,11 +17,13 @@ function addEmojiPicker(inputSelector) {
     })
 
     $(inputSelector).data('emojioneArea').editor.focus()
+
+    removeAnythingOtherThanEmojisFromInput(inputSelector)
   })
 }
 
 function removeAnythingOtherThanEmojisFromInput(inputSelector) {
-  $(inputSelector).parent().on('focusout', '.emojionearea-editor', function() {
+  $(inputSelector).data('emojioneArea').editor.on('focusout', function() {
     $(this).contents().filter(function() {
       return this.nodeType == 3
     }).remove()
