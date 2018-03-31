@@ -16,6 +16,8 @@ function addEmojiPicker(inputSelector) {
       searchPlaceholder: 'Search',
       shortcuts: false
     })
+
+    $(inputSelector).data('emojioneArea').editor.focus()
   })
 }
 
