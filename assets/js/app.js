@@ -19,8 +19,8 @@ import "phoenix_html"
 // paths "./socket" or full ones "web/static/js/socket".
 
 // import socket from "./socket"
-import { activateEmojiPicker } from "./emoji_form"
-activateEmojiPicker('#emoji_content')
+import { addEmojiPicker } from "./emoji_form"
+addEmojiPicker('#emoji_content')
 
 import { showEmojiContentUsingEmojiOneImages } from "./guess_form"
 showEmojiContentUsingEmojiOneImages('label[for="guess_content"]')

@@ -1,10 +1,10 @@
-export function activateEmojiPicker(inputSelector) {
+export function addEmojiPicker(inputSelector) {
   if($(inputSelector).length > 0) {
-    addEmojiPicker(inputSelector)
+    activateEmojiPicker(inputSelector)
   }
 }
 
-function addEmojiPicker(inputSelector) {
+function activateEmojiPicker(inputSelector) {
   require('jquery-textcomplete')
   require('emojione')
   require('emojionearea')
