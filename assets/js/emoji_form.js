@@ -6,6 +6,7 @@ export function activateEmojiPicker(inputSelector) {
 }
 
 function addEmojiPicker(inputSelector) {
+  require('jquery-textcomplete')
   require('emojione')
   require('emojionearea')
 
