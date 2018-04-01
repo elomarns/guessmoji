@@ -13,8 +13,12 @@ defmodule GuessmojiWeb.GuessControllerHelper do
   end
 
   def add_emoji_to_assigns(conn, _opts) do
-    emoji = Media.get_random_emoji()
+    emoji = Media.get_random_emoji(get_emojis_ids_to_ignore(conn))
     assign(conn, :emoji, emoji)
+  end
+
+  defp get_emojis_ids_to_ignore(conn) do
+    get_session(conn, :emojis_ids_to_ignore) || []
   end
 
   def redirect_to_new_emoji_if_there_is_no_emoji(%Conn{assigns: %{emoji: nil}} = conn, _opts) do
@@ -33,6 +37,10 @@ defmodule GuessmojiWeb.GuessControllerHelper do
       conn.params["guess"]["emoji_id"],
       conn.assigns.emoji.id
     )
+  end
+
+  def ignore_emoji(conn, emoji_id) do
+    put_session(conn, :emojis_ids_to_ignore, get_emojis_ids_to_ignore(conn) ++ [emoji_id])
   end
 
   def put_flash_for_guess(conn, %Guess{correct: true}) do

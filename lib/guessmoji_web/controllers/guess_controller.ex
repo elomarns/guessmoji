@@ -17,6 +17,7 @@ defmodule GuessmojiWeb.GuessController do
     case Media.create_guess(guess_params) do
       {:ok, guess} ->
         conn
+        |> ignore_emoji(guess.emoji_id)
         |> put_flash_for_guess(guess)
         |> render_new_or_redirect_for_guess(guess)
 

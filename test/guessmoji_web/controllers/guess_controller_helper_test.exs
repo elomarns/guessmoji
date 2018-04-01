@@ -33,6 +33,19 @@ defmodule GuesmojiWeb.GuessControllerHelperTest do
       conn = add_emoji_to_assigns(conn, %{})
       assert %Emoji{} = conn.assigns.emoji
     end
+
+    test "adds random emoji on assigns considering the emojis ids to ignore", %{
+      conn: conn,
+      emoji: emoji
+    } do
+      conn = put_session(conn, :emojis_ids_to_ignore, [emoji.id])
+      conn = add_emoji_to_assigns(conn, %{})
+      assert conn.assigns.emoji == nil
+
+      conn = put_session(conn, :emojis_ids_to_ignore, nil)
+      conn = add_emoji_to_assigns(conn, %{})
+      assert conn.assigns.emoji == emoji
+    end
   end
 
   describe "redirect_to_new_emoji_if_there_is_no_emoji" do
@@ -58,6 +71,13 @@ defmodule GuesmojiWeb.GuessControllerHelperTest do
       conn = assign(conn, :emoji, emoji)
       conn = add_emoji_id_to_params(conn, %{})
       assert conn.params["guess"]["emoji_id"] == emoji.id
+    end
+  end
+
+  describe "ignore_emoji" do
+    test "adds the emoji id on the list of emojis ids to ignore", %{conn: conn} do
+      conn = ignore_emoji(conn, 1)
+      assert get_session(conn, :emojis_ids_to_ignore) == [1]
     end
   end
 
