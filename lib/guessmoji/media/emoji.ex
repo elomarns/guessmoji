@@ -22,7 +22,12 @@ defmodule Guessmoji.Media.Emoji do
     |> trim(:decoded_content)
   end
 
-  def random do
-    from(e in Emoji, order_by: fragment("random()"), limit: 1)
+  def random(excluded_ids) when is_list(excluded_ids) do
+    from(
+      e in Emoji,
+      where: e.id not in ^excluded_ids,
+      order_by: fragment("random()"),
+      limit: 1
+    )
   end
 end

@@ -147,12 +147,12 @@ defmodule Guessmoji.MediaTest do
       assert Media.get_emoji!(emoji.id) == emoji
     end
 
-    test "get_random_emoji/0 returns a random emoji" do
+    test "get_random_emoji/1 returns a random emoji considering the excluded ids" do
       emoji = emoji_fixture(emoji_valid_attrs())
-      assert Media.get_random_emoji() == emoji
+      assert Media.get_random_emoji([]) == emoji
 
       another_emoji = emoji_fixture(emoji_update_attrs())
-      assert Media.get_random_emoji() in [emoji, another_emoji]
+      assert Media.get_random_emoji([emoji.id]) == another_emoji
     end
 
     test "create_emoji/1 with valid data creates a emoji" do
