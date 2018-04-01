@@ -71,7 +71,8 @@ defmodule Guessmoji.Media do
   def get_emoji!(id), do: Repo.get!(Emoji, id)
 
   def get_random_emoji(excluded_ids) do
-    Repo.one(Emoji.random(excluded_ids))
+    Emoji.random(excluded_ids)
+    |> Repo.one()
   end
 
   def create_emoji(attrs \\ %{}) do
