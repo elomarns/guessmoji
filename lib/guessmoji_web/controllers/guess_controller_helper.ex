@@ -23,7 +23,7 @@ defmodule GuessmojiWeb.GuessControllerHelper do
 
   def redirect_to_new_emoji_if_there_is_no_emoji(%Conn{assigns: %{emoji: nil}} = conn, _opts) do
     conn
-    |> put_flash(:error, "There's no emoji to guess.")
+    |> put_flash(:error, "There's no emoji available to guess. How about you create a new one?")
     |> redirect(to: emoji_path(conn, :new))
     |> halt()
   end
@@ -43,12 +43,31 @@ defmodule GuessmojiWeb.GuessControllerHelper do
     put_session(conn, :emojis_ids_to_ignore, get_emojis_ids_to_ignore(conn) ++ [emoji_id])
   end
 
-  def put_flash_for_guess(conn, %Guess{correct: true}) do
-    put_flash(conn, :info, "Your guess is right!")
+  def put_flash_for_guess(conn, %Guess{correct: true} = guess) do
+    put_flash(conn, :info, feedback_message_for_guess(guess))
   end
 
-  def put_flash_for_guess(conn, %Guess{correct: false}) do
-    put_flash(conn, :error, "Your guess is wrong!")
+  @right_guesses_feedback [
+    "Nailed it!",
+    "You're goddamn right!",
+    "Bingo!",
+    "You are correct, sir!"
+  ]
+  def feedback_message_for_guess(%Guess{correct: true}) do
+    Enum.random(@right_guesses_feedback)
+  end
+
+  def put_flash_for_guess(conn, %Guess{correct: false} = guess) do
+    put_flash(conn, :error, feedback_message_for_guess(guess))
+  end
+
+  @wrong_guesses_messages [
+    "Wrong answer, my friend!",
+    "This is not the answer you are looking for",
+    "Houston, we have a wrong answer"
+  ]
+  def feedback_message_for_guess(%Guess{correct: false}) do
+    Enum.random(@wrong_guesses_messages)
   end
 
   def render_new_or_redirect_for_guess(conn, %Guess{correct: true}) do

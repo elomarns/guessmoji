@@ -16,7 +16,7 @@ defmodule GuessmojiWeb.EmojiController do
     case Media.create_emoji(emoji_params) do
       {:ok, emoji} ->
         conn
-        |> put_flash(:info, "Emoji created successfully.")
+        |> put_flash(:info, "And... it's done!")
         |> redirect(to: emoji_guess_path(conn, :new, emoji))
 
       {:error, %Ecto.Changeset{} = changeset} ->

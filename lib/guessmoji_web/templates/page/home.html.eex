@@ -1,11 +1,11 @@
 <div class="jumbotron border">
   <h1 class="display-4">
-    Guess the movie from the emoji!
+    Guess the movie from the emojis!
   </h1>
 
   <p class="lead">
-    That's all this website is about! I show you an emoji, and you tell me which
-    movie it represents!
+    That's all this website is about! I show you the emojis, and you tell me
+    the movie!
   </p>
 
   <p class="lead">
