@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
-  <body class="bg-light">
+  <body>
     <%= render "header.html", assigns %>
 
     <div class="container">
