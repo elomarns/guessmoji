@@ -4,7 +4,8 @@
       Guess the movie from the emojis:
       <%= content_tag :span, @emoji.content, class: :guess_emoji_content %>
     <% end %>
-    <%= text_input_with_errors @changeset, f, :content, autofocus: :autofocus %>
+    <%= text_input_with_errors @changeset, f, :content, autofocus: :autofocus,
+      autocomplete: :off %>
     <%= error_tag f, :content %>
   </div>
 

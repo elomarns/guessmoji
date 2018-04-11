@@ -8,7 +8,8 @@
 
   <div class="form-group">
     <%= label f, :decoded_content, "Movie", class: "control-label" %>
-    <%= text_input_with_errors @changeset, f, :decoded_content %>
+    <%= text_input_with_errors @changeset, f, :decoded_content,
+      autocomplete: :off %>
     <%= error_tag f, :decoded_content %>
   </div>
 
