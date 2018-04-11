@@ -1,3 +1,17 @@
+.emojionearea.is-invalid {
+  border-color: $form-feedback-invalid-color;
+
+  &:focus {
+    border-color: $form-feedback-invalid-color;
+    box-shadow: 0 0 0 $input-focus-width rgba($form-feedback-invalid-color, .25);
+  }
+
+  &.focused {
+    border-color: $form-feedback-invalid-color;
+    box-shadow: 0 0 0 $input-focus-width rgba($form-feedback-invalid-color, .25);
+  }
+}
+
 .emojionearea.emojionearea-inline {
   height: 38px;
 }
