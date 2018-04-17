@@ -84,13 +84,13 @@ defmodule GuesmojiWeb.GuessControllerHelperTest do
   describe "put_flash_for_guess" do
     test "puts info flash if the guess is correct", %{conn: conn} do
       conn = put_flash_for_guess(conn, %Guess{correct: true})
-      assert get_flash(conn, :info) == "Your guess is right!"
+      assert get_flash(conn, :info) in get_right_guess_messages()
       refute get_flash(conn, :error)
     end
 
     test "puts error flash if the guess is wrong", %{conn: conn} do
       conn = put_flash_for_guess(conn, %Guess{correct: false})
-      assert get_flash(conn, :error) == "Your guess is wrong!"
+      assert get_flash(conn, :error) in get_wrong_guess_messages()
       refute get_flash(conn, :info)
     end
   end

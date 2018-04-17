@@ -1,5 +1,6 @@
 defmodule GuesmojiWeb.GuessControllerTest do
   use GuessmojiWeb.ConnCase
+  import GuessmojiWeb.GuessControllerHelper
 
   setup %{conn: conn} = config do
     if config[:without_emojis] do
@@ -56,11 +57,11 @@ defmodule GuesmojiWeb.GuessControllerTest do
     test "adds a feedback message on flash", %{conn: conn, emoji: emoji} do
       valid_attrs = %{content: "Star Wars"}
       conn = post(conn, emoji_guess_path(conn, :create, emoji), guess: valid_attrs)
-      assert get_flash(conn, :error) == "Your guess is wrong!"
+      assert get_flash(conn, :error) in get_wrong_guess_messages()
 
       valid_attrs = %{content: "Star Wars: Episode I – The Phantom Menace"}
       conn = post(conn, emoji_guess_path(conn, :create, emoji), guess: valid_attrs)
-      assert get_flash(conn, :info) == "Your guess is right!"
+      assert get_flash(conn, :info) in get_right_guess_messages()
     end
 
     test "renders new when data is valid and the guess is wrong", %{conn: conn, emoji: emoji} do

@@ -51,25 +51,29 @@ defmodule GuessmojiWeb.GuessControllerHelper do
     put_flash(conn, :error, feedback_message_for_guess(guess))
   end
 
-  @right_guesses_feedback [
+  @right_guess_messages [
     "Nailed it!",
     "You're goddamn right!",
     "Bingo!",
     "You are correct, sir!"
   ]
 
-  @wrong_guesses_messages [
+  def get_right_guess_messages, do: @right_guess_messages
+
+  @wrong_guess_messages [
     "Wrong answer, my friend!",
-    "This is not the answer you are looking for",
-    "Houston, we have a wrong answer"
+    "This is not the answer you are looking for.",
+    "Houston, we have a wrong answer."
   ]
 
+  def get_wrong_guess_messages, do: @wrong_guess_messages
+
   def feedback_message_for_guess(%Guess{correct: true}) do
-    Enum.random(@right_guesses_feedback)
+    Enum.random(@right_guess_messages)
   end
 
   def feedback_message_for_guess(%Guess{correct: false}) do
-    Enum.random(@wrong_guesses_messages)
+    Enum.random(@wrong_guess_messages)
   end
 
   def render_new_or_redirect_for_guess(conn, %Guess{correct: true}) do
