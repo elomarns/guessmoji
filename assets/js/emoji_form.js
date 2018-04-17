@@ -6,7 +6,9 @@ export function addEmojiPicker(inputSelector) {
 
 function activateEmojiPicker(inputSelector) {
   require('jquery-textcomplete')
-  require('emojione')
+  // Fetching emojione from the CDN because otherwise it breaks the application
+  // when used with brunch build --production.
+  // require('emojione')
   require('emojionearea')
 
   $(document).ready(() => {
