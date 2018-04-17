@@ -4,8 +4,8 @@ defmodule GuessmojiWeb.GuessController do
   alias Guessmoji.Media
   alias Guessmoji.Media.Guess
 
-  plug(:add_emoji_to_assigns)
-  plug(:redirect_to_new_emoji_if_there_is_no_emoji)
+  plug(:add_emoji_to_assigns when action in [:new, :create])
+  plug(:redirect_to_new_emoji_if_there_is_no_emoji when action in [:new, :create])
   plug(:add_emoji_id_to_params when action in [:create])
 
   def new(conn, _params) do
