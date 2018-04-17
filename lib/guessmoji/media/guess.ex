@@ -33,6 +33,12 @@ defmodule Guessmoji.Media.Guess do
   end
 
   defp correct?(%Guess{} = guess, %Emoji{} = emoji) do
-    String.downcase(guess.content) == String.downcase(emoji.decoded_content)
+    normalize(guess.content) == normalize(emoji.decoded_content)
+  end
+
+  defp normalize(string) do
+    string
+    |> String.downcase()
+    |> String.replace(~r/:/, "-")
   end
 end
