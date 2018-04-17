@@ -47,25 +47,27 @@ defmodule GuessmojiWeb.GuessControllerHelper do
     put_flash(conn, :info, feedback_message_for_guess(guess))
   end
 
+  def put_flash_for_guess(conn, %Guess{correct: false} = guess) do
+    put_flash(conn, :error, feedback_message_for_guess(guess))
+  end
+
   @right_guesses_feedback [
     "Nailed it!",
     "You're goddamn right!",
     "Bingo!",
     "You are correct, sir!"
   ]
-  def feedback_message_for_guess(%Guess{correct: true}) do
-    Enum.random(@right_guesses_feedback)
-  end
-
-  def put_flash_for_guess(conn, %Guess{correct: false} = guess) do
-    put_flash(conn, :error, feedback_message_for_guess(guess))
-  end
 
   @wrong_guesses_messages [
     "Wrong answer, my friend!",
     "This is not the answer you are looking for",
     "Houston, we have a wrong answer"
   ]
+
+  def feedback_message_for_guess(%Guess{correct: true}) do
+    Enum.random(@right_guesses_feedback)
+  end
+
   def feedback_message_for_guess(%Guess{correct: false}) do
     Enum.random(@wrong_guesses_messages)
   end
