@@ -18,10 +18,24 @@ function activateEmojiPicker(inputSelector) {
       shortcuts: false
     })
 
-    $(inputSelector).data('emojioneArea').editor.focus()
+    executeCallbackWhenEmojiOneEditorExists(inputSelector, () => {
+      $(inputSelector).data('emojioneArea').editor.focus()
 
-    removeAnythingOtherThanEmojisFromInput(inputSelector)
+      removeAnythingOtherThanEmojisFromInput(inputSelector)
+    })
   })
+}
+
+function executeCallbackWhenEmojiOneEditorExists(inputSelector, callback) {
+  const editor = $(inputSelector).data('emojioneArea').editor
+
+  if(editor) {
+    callback()
+  } else {
+    setTimeout(() => {
+      executeCallbackWhenEmojiOneEditorExists(inputSelector, callback)
+    }, 100)
+  }
 }
 
 function removeAnythingOtherThanEmojisFromInput(inputSelector) {

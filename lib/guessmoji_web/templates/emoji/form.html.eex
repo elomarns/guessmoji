@@ -1,7 +1,7 @@
 <%= form_for @changeset, @action, fn f -> %>
   <div class="form-group">
     <%= label f, :content, "Emoji", class: "control-label" %>
-    <%= text_input_with_errors @changeset, f, :content, autofocus: :autofocus,
+    <%= text_input_with_errors @changeset, f, :content,
       placeholder: "Type : to autocomplete" %>
     <%= error_tag f, :content %>
   </div>
