@@ -11,6 +11,8 @@
     <title>Guessmoji - Guess the movie from the emoji!</title>
 
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+
+    <%= render "google_analytics.html" %>
   </head>
 
   <body>
