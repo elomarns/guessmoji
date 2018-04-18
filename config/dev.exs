@@ -11,8 +11,14 @@ config :guessmoji, GuessmojiWeb.Endpoint,
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
-  watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin",
-                    cd: Path.expand("../assets", __DIR__)]]
+  watchers: [
+    node: [
+      "node_modules/brunch/bin/brunch",
+      "watch",
+      "--stdin",
+      cd: Path.expand("../assets", __DIR__)
+    ]
+  ]
 
 # ## SSL Support
 #
@@ -56,3 +62,6 @@ config :guessmoji, Guessmoji.Repo,
   database: "guessmoji_dev",
   hostname: "localhost",
   pool_size: 10
+
+# Don't include the Google Analytics script on development environment.
+config :guessmoji, :include_google_analytics_script, false

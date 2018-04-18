@@ -61,6 +61,9 @@ config :phoenix, :serve_endpoints, true
 #     config :guessmoji, GuessmojiWeb.Endpoint, server: true
 #
 
+# Include the Google Analytics script on production environment.
+config :guessmoji, :include_google_analytics_script, true
+
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
 import_config "prod.secret.exs"

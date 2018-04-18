@@ -1,4 +1,4 @@
-<%= if Mix.env == :prod do %>
+<%= if Application.get_env(:guessmoji, :include_google_analytics_script) do %>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117776190-1"></script>
   <script>

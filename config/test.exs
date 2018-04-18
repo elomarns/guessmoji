@@ -17,3 +17,6 @@ config :guessmoji, Guessmoji.Repo,
   database: "guessmoji_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+# Don't include the Google Analytics script on test environment.
+config :guessmoji, :include_google_analytics_script, false
