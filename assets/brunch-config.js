@@ -52,6 +52,13 @@ exports.config = {
       ignore: [/vendor/]
     },
 
+    copycat: {
+      // EmojiOne doesn't work with brunch build --production, so it's being copied.
+      "js": "node_modules/emojione/lib/js/emojione.min.js",
+      verbose : true,
+      onlyChanged: true
+    },
+
     sass: {
       options: {
         includePaths: ["node_modules/bootstrap/scss", "node_modules/emojionearea/dist"],

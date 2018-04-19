@@ -3,7 +3,6 @@ export function showEmojiContentUsingEmojiOneImages(labelSelector) {
     const guessContentLabel = $(labelSelector)
 
     if(guessContentLabel.length > 0) {
-      let emojione = require('emojione')
       let emojiAsUnicode = guessContentLabel.data('emoji-content')
       var emojiAsImage = emojione.unicodeToImage(emojiAsUnicode)
 
