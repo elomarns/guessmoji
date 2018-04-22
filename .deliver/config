@@ -10,7 +10,7 @@ PRODUCTION_HOSTS="206.189.72.19"
 PRODUCTION_USER="applications"
 DELIVER_TO="/home/applications"
 
-# For Phoenix projects, symlink prod.secret.exs to our tmp source.
+# For Phoenix projects, symlink prod.secret.exs to tmp source.
 pre_erlang_get_and_update_deps() {
   local _prod_secret_path="/tmp/edeliver/guessmoji/config/prod.secret.exs"
 
@@ -26,7 +26,7 @@ pre_erlang_clean_compile() {
   __sync_remote " # Runs the commands on the build host.
     source ~/.profile
 
-    set -e # Fail if any command fails (recommended).
+    set -e # Fail if any command fails.
 
     cd '$BUILD_AT' # Enter the build directory on the build host.
     mkdir -p priv/static
