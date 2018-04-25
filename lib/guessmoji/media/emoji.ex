@@ -19,6 +19,11 @@ defmodule Guessmoji.Media.Emoji do
     emoji
     |> cast(attrs, [:content, :decoded_content, :tip, :language_id, :category_id])
     |> validate_required([:content, :decoded_content, :language_id, :category_id])
+    |> unique_constraint(
+      :content,
+      name: :emojis_content_decoded_content_index,
+      message: "emoji content and decoded content have already been taken"
+    )
     |> trim(:decoded_content)
   end
 

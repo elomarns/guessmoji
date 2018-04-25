@@ -18,6 +18,10 @@ msgstr "hey, you need to fill this"
 msgid "has already been taken"
 msgstr ""
 
+## For emojis with duplicate pair of content and decoded content.
+msgid "emoji content and decoded content have already been taken"
+msgstr "sorry, but this pair of emoji and movie was already added"
+
 ## From Ecto.Changeset.put_change/3
 msgid "is invalid"
 msgstr ""
