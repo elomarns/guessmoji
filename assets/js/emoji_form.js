@@ -41,11 +41,4 @@ function removeAnythingOtherThanEmojisFromInput(inputSelector) {
       return this.nodeType == 3
     }).remove()
   })
-
-  $(document).on('change', inputSelector, function() {
-    const content = $(this).val()
-    const newContent = content.replace(/\w+/gi, '')
-
-    $(this).val(newContent)
-  })
 }
