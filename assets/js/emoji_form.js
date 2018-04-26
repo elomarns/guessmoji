@@ -1,4 +1,4 @@
-import { replaceProblematicEmojis, unicodeToImages } from "./emoji"
+import { replaceProblematicEmojis } from "./emoji"
 
 export function addEmojiPicker(inputSelector) {
   if($(inputSelector).length > 0) {
@@ -14,7 +14,8 @@ function activateEmojiPicker(inputSelector) {
     $(inputSelector).emojioneArea({
       pickerPosition: "right",
       searchPlaceholder: 'Search',
-      shortcuts: false
+      shortcuts: false,
+      saveEmojisAs: 'shortname',
     })
 
     executeCallbackWhenEmojiOneEditorExists(inputSelector, () => {
@@ -49,7 +50,8 @@ function removeAnythingOtherThanEmojisFromInput(inputSelector) {
     const newContent = replaceProblematicEmojis(content)
     $(this).val(newContent)
 
-    const emojisAsImages = unicodeToImages(newContent)
+    let emojisAsImages = emojione.shortnameToImage(newContent)
+    emojisAsImages = $(emojisAsImages).addClass('emojioneemoji')
     $(inputSelector).data('emojioneArea').editor.html(emojisAsImages)
   })
 }

@@ -1,21 +1,27 @@
-export function replaceProblematicEmojis(emojisAsUnicode) {
-  return emojisAsUnicode.replace('⬆', '⬆️')
-}
-
-export function unicodeToImages(emojisAsUnicode) {
-  const iterator = emojisAsUnicode[Symbol.iterator]()
-  let currentEmoji
-  let emojisAsImages = ""
-
-  while(currentEmoji = iterator.next().value) {
-    currentEmoji = replaceProblematicEmojis(currentEmoji)
-
-    if(currentEmoji != "") {
-      emojisAsImages += emojione.unicodeToImage(currentEmoji);
-    }
-  }
-
-  emojisAsImages = $(emojisAsImages).addClass('emojioneemoji')
-
-  return emojisAsImages
+export function replaceProblematicEmojis(emojis) {
+  return emojis.replace('⬆', ':arrow_up:')
+    .replace('↖', ':arrow_upper_left:')
+    .replace('⬅', ':arrow_left:')
+    .replace('↙', ':arrow_lower_left:')
+    .replace('⬇', ':arrow_down:')
+    .replace('↘', ':arrow_lower_right:')
+    .replace('➡', ':arrow_right:')
+    .replace('↪', ':arrow_right_hook:')
+    .replace('↗', ':arrow_upper_right:')
+    .replace('↕', ':arrow_up_down:')
+    .replace('⤵', ':arrow_heading_down:')
+    .replace('⤴', ':arrow_heading_up:')
+    .replace('◀', ':arrow_backward:')
+    .replace('▶', ':arrow_forward:')
+    .replace('0⃣', ':zero:')
+    .replace('1⃣', ':one:')
+    .replace('2⃣', ':two:')
+    .replace('3⃣', ':three:')
+    .replace('4⃣', ':four:')
+    .replace('5⃣', ':five:')
+    .replace('6⃣', ':six:')
+    .replace('7⃣', ':seven:')
+    .replace('8⃣', ':eight:')
+    .replace('9⃣', ':nine:')
+    .replace('🕹', ':joystick:')
 }
