@@ -1,3 +1,5 @@
+import { replaceProblematicEmojis } from "./emoji"
+
 export function addEmojiPicker(inputSelector) {
   if($(inputSelector).length > 0) {
     activateEmojiPicker(inputSelector)
@@ -40,5 +42,11 @@ function removeAnythingOtherThanEmojisFromInput(inputSelector) {
     $(this).contents().filter(function() {
       return this.nodeType == 3
     }).remove()
+  })
+
+  $(document).on('change', inputSelector, function() {
+    const content = $(this).val()
+    const newContent = replaceProblematicEmojis(content)
+    $(this).val(newContent)
   })
 }
