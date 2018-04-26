@@ -3,9 +3,9 @@ export function showEmojiContentUsingEmojiOneImages(labelSelector) {
     const label = $(labelSelector)
 
     if(label.length > 0) {
-      const emojisAsUnicode = label.data('emoji-content')
+      const emojisAsUnicode = label.data("emoji-content")
       const emojisAsImages = emojione.shortnameToImage(emojisAsUnicode)
-      label.find('.guess_emoji_content').html(emojisAsImages)
+      label.find(".guess_emoji_content").html(emojisAsImages)
     }
   })
 }

@@ -7,19 +7,19 @@ export function addEmojiPicker(inputSelector) {
 }
 
 function activateEmojiPicker(inputSelector) {
-  require('jquery-textcomplete')
-  require('emojionearea')
+  require("jquery-textcomplete")
+  require("emojionearea")
 
   $(document).ready(() => {
     $(inputSelector).emojioneArea({
       pickerPosition: "right",
-      searchPlaceholder: 'Search',
+      searchPlaceholder: "Search",
       shortcuts: false,
-      saveEmojisAs: 'shortname',
+      saveEmojisAs: "shortname",
     })
 
     executeCallbackWhenEmojiOneEditorExists(inputSelector, () => {
-      $(inputSelector).data('emojioneArea').editor.focus()
+      $(inputSelector).data("emojioneArea").editor.focus()
 
       removeAnythingOtherThanEmojisFromInput(inputSelector)
     })
@@ -27,7 +27,7 @@ function activateEmojiPicker(inputSelector) {
 }
 
 function executeCallbackWhenEmojiOneEditorExists(inputSelector, callback) {
-  const editor = $(inputSelector).data('emojioneArea').editor
+  const editor = $(inputSelector).data("emojioneArea").editor
 
   if(editor) {
     callback()
@@ -39,19 +39,19 @@ function executeCallbackWhenEmojiOneEditorExists(inputSelector, callback) {
 }
 
 function removeAnythingOtherThanEmojisFromInput(inputSelector) {
-  $(inputSelector).data('emojioneArea').editor.on('focusout', function() {
+  $(inputSelector).data("emojioneArea").editor.on("focusout", function() {
     $(this).contents().filter(function() {
       return this.nodeType == 3
     }).remove()
   })
 
-  $(document).on('change', inputSelector, function() {
+  $(document).on("change", inputSelector, function() {
     const content = $(this).val()
     const newContent = replaceProblematicEmojis(content)
     $(this).val(newContent)
 
     let emojisAsImages = emojione.shortnameToImage(newContent)
-    emojisAsImages = $(emojisAsImages).addClass('emojioneemoji')
-    $(inputSelector).data('emojioneArea').editor.html(emojisAsImages)
+    emojisAsImages = $(emojisAsImages).addClass("emojioneemoji")
+    $(inputSelector).data("emojioneArea").editor.html(emojisAsImages)
   })
 }
