@@ -1,12 +1,12 @@
 APP="guessmoji"
 
-BUILD_HOST="206.189.72.19"
+BUILD_HOST="167.99.107.111"
 BUILD_USER="applications"
 BUILD_AT="/tmp/edeliver/$APP/builds"
 
 RELEASE_DIR="/tmp/edeliver/$APP/builds/_build/prod/rel/$APP"
 
-PRODUCTION_HOSTS="206.189.72.19"
+PRODUCTION_HOSTS="167.99.107.111"
 PRODUCTION_USER="applications"
 DELIVER_TO="/home/applications"
 
