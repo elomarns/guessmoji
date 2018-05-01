@@ -14,5 +14,6 @@ defmodule Guessmoji.Repo.Migrations.CreateEmojis do
 
     create(index(:emojis, [:language_id]))
     create(index(:emojis, [:category_id]))
+    create(unique_index(:emojis, [:content, :decoded_content]))
   end
 end
