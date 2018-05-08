@@ -5,7 +5,7 @@ defmodule GuessmojiWeb.GuessControllerHelper do
 
   alias Plug.Conn
   alias Guessmoji.Media
-  alias Guessmoji.Media.Guess
+  alias Guessmoji.Media.{Emoji, Guess}
 
   def add_emoji_to_assigns(%Conn{params: %{"emoji_id" => emoji_id}} = conn, _opts) do
     emoji = Media.get_emoji!(emoji_id)
@@ -14,22 +14,32 @@ defmodule GuessmojiWeb.GuessControllerHelper do
 
   def add_emoji_to_assigns(conn, _opts) do
     emoji = Media.get_random_emoji(get_emojis_ids_to_ignore(conn))
-    assign(conn, :emoji, emoji)
+    handle_random_emoji(conn, emoji)
+  end
+
+  defp handle_random_emoji(conn, nil) do
+    conn
+  end
+
+  defp handle_random_emoji(conn, %Emoji{} = emoji) do
+    conn
+    |> redirect(to: emoji_guess_path(conn, :new, emoji))
+    |> halt()
   end
 
   defp get_emojis_ids_to_ignore(conn) do
     get_session(conn, :emojis_ids_to_ignore) || []
   end
 
-  def redirect_to_new_emoji_if_there_is_no_emoji(%Conn{assigns: %{emoji: nil}} = conn, _opts) do
+  def redirect_to_new_emoji_if_there_is_no_emoji(%Conn{assigns: %{emoji: _emoji}} = conn, _opts) do
+    conn
+  end
+
+  def redirect_to_new_emoji_if_there_is_no_emoji(%Conn{assigns: %{}} = conn, _opts) do
     conn
     |> put_flash(:error, "There's no emoji available to guess. How about you create a new one?")
     |> redirect(to: emoji_path(conn, :new))
     |> halt()
-  end
-
-  def redirect_to_new_emoji_if_there_is_no_emoji(%Conn{assigns: %{emoji: _emoji}} = conn, _opts) do
-    conn
   end
 
   def add_emoji_id_to_params(conn, _opts) do
