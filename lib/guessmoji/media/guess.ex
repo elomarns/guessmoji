@@ -1,7 +1,7 @@
 defmodule Guessmoji.Media.Guess do
   use Ecto.Schema
   import Ecto.Changeset
-  import Guessmoji.ChangesetChangesTrimmer
+  import Guessmoji.{ChangesetChangesTrimmer, StringNormalizer}
   alias Guessmoji.Media
   alias Guessmoji.Media.{Emoji, Guess}
 
@@ -34,11 +34,5 @@ defmodule Guessmoji.Media.Guess do
 
   defp correct?(%Guess{} = guess, %Emoji{} = emoji) do
     normalize(guess.content) == normalize(emoji.decoded_content)
-  end
-
-  defp normalize(string) do
-    string
-    |> String.downcase()
-    |> String.replace(~r/:/, "-")
   end
 end
