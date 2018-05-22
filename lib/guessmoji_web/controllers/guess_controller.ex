@@ -5,7 +5,6 @@ defmodule GuessmojiWeb.GuessController do
   alias Guessmoji.Media.Guess
 
   plug(:add_emoji_to_assigns when action in [:new, :create])
-  plug(:redirect_to_new_emoji_if_there_is_no_emoji when action in [:new, :create])
   plug(:add_emoji_id_to_params when action in [:create])
 
   def new(conn, _params) do
@@ -17,7 +16,7 @@ defmodule GuessmojiWeb.GuessController do
     case Media.create_guess(guess_params) do
       {:ok, guess} ->
         conn
-        |> ignore_emoji(guess.emoji_id)
+        |> handle_emoji_ignore_list_for_guess(guess)
         |> put_flash_for_guess(guess)
         |> render_new_or_redirect_for_guess(guess)
 
