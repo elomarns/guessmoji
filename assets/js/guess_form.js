@@ -9,3 +9,15 @@ export function showEmojiContentUsingEmojiOneImages(labelSelector) {
     }
   })
 }
+
+export function activateEmojiTipLink(linkSelector) {
+  $(document).on('click', linkSelector, function(event) {
+    $(this).hide()
+
+    const tipContainer = $(this).siblings('[data-emoji-tip]')
+    const tip = tipContainer.data('emoji-tip')
+    tipContainer.html(tip)
+
+    event.preventDefault()
+  })
+}

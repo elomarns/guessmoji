@@ -11,7 +11,9 @@
 
   <%= if @emoji.tip do %>
     <p>
-      Tip: <%= @emoji.tip %>
+      Tip:
+      <%= link "show", to: show_emoji_tip_url(@action), id: "show_tip" %>
+      <span data-emoji-tip="<%= @emoji.tip %>"></span>
     </p>
   <% end %>
 
