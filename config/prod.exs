@@ -15,7 +15,7 @@ use Mix.Config
 # which you typically run after static files are built.
 config :guessmoji, GuessmojiWeb.Endpoint,
   http: [port: 8000],
-  url: [host: "guessmoji.io", port: 80],
+  url: [host: "guessmoji.io", port: 443, scheme: "https"],
   cache_static_manifest: "priv/static/cache_manifest.json",
   server: true,
   code_reloader: false
