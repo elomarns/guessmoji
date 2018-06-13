@@ -5,11 +5,6 @@ defmodule Guessmoji.MediaTest do
   describe "languages" do
     alias Guessmoji.Media.Language
 
-    test "get_language!/1 returns the language with given id" do
-      language = language_fixture()
-      assert Media.get_language!(language.id) == language
-    end
-
     test "get_language_by/1 returns the language with the given fields" do
       fields = language_valid_attrs()
       language = language_fixture(fields)
@@ -38,11 +33,6 @@ defmodule Guessmoji.MediaTest do
 
   describe "categories" do
     alias Guessmoji.Media.Category
-
-    test "get_category!/1 returns the category with given id" do
-      category = category_fixture()
-      assert Media.get_category!(category.id) == category
-    end
 
     test "get_category_by/1 returns the category with the given fields" do
       fields = category_valid_attrs()
