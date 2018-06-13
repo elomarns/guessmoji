@@ -22,7 +22,7 @@ defmodule Guessmoji.MediaTest do
     end
 
     test "create_language/1 with an existing name returns error changeset" do
-      language_fixture()
+      language_fixture(language_valid_attrs())
 
       assert {:error, %Ecto.Changeset{} = changeset} =
                Media.create_language(language_valid_attrs())
@@ -51,7 +51,7 @@ defmodule Guessmoji.MediaTest do
     end
 
     test "create_category/1 with an existing name returns error changeset" do
-      category_fixture()
+      category_fixture(category_valid_attrs())
 
       assert {:error, %Ecto.Changeset{} = changeset} =
                Media.create_category(category_valid_attrs())
