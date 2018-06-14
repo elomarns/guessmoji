@@ -91,17 +91,23 @@ defmodule Guessmoji.MediaTest do
     end
 
     test "create_emoji/1 with a duplicate pair of content and decoded content returns error changeset" do
-      emoji_fixture()
+      valid_attrs = emoji_valid_attrs()
+      emoji_fixture(valid_attrs)
 
-      assert {:error, %Ecto.Changeset{} = changeset} = Media.create_emoji(emoji_valid_attrs())
+      attrs_with_duplicate_data =
+        emoji_update_attrs()
+        |> Map.put(:content, valid_attrs.content)
+        |> Map.put(:decoded_content, valid_attrs.decoded_content)
+
+      assert {:error, %Ecto.Changeset{} = changeset} =
+               Media.create_emoji(attrs_with_duplicate_data)
 
       assert %{content: ["emoji content and decoded content have already been taken"]} =
                errors_on(changeset)
     end
 
-    test "change_emoji/1 returns a emoji changeset" do
-      emoji = emoji_fixture()
-      assert %Ecto.Changeset{} = Media.change_emoji(emoji)
+    test "change_emoji/1 returns an emoji changeset" do
+      assert %Ecto.Changeset{} = Media.change_emoji(%Emoji{})
     end
   end
 

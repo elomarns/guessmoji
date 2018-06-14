@@ -32,7 +32,7 @@ defmodule Guessmoji.Fixtures do
     category_fields = %{name: "Movies"}
 
     %{
-      content: "⭐🔫👻🔪",
+      content: ":star::gun::ghost::knife:",
       decoded_content: "Star Wars: Episode I – The Phantom Menace",
       tip: nil,
       language_id:
@@ -47,7 +47,7 @@ defmodule Guessmoji.Fixtures do
     category_fields = %{name: "Pixar Movies"}
 
     %{
-      content: "⬆️",
+      content: ":arrow_up:",
       decoded_content: "Up",
       tip: "This movie has the best introduction scene ever!",
       language_id:
