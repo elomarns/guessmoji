@@ -5,7 +5,7 @@ defmodule Guessmoji.ChangesetChangesTrimmerTest do
 
   test "trim/2 removes all leading and trailing whitespace on changed field" do
     changeset =
-      Language.changeset(%Language{}, %{name: "  Portuguese  "})
+      Ecto.Changeset.cast(%Language{}, %{name: "  Portuguese  "}, [:name])
       |> trim(:name)
 
     name = get_change(changeset, :name)
@@ -14,7 +14,7 @@ defmodule Guessmoji.ChangesetChangesTrimmerTest do
 
   test "trim/2 replaces multiple whitespaces for just one" do
     changeset =
-      Language.changeset(%Language{}, %{name: "Brazilian  Portuguese"})
+      Ecto.Changeset.cast(%Language{}, %{name: "Brazilian  Portuguese"}, [:name])
       |> trim(:name)
 
     name = get_change(changeset, :name)

@@ -3,7 +3,6 @@ defmodule Guessmoji.ChangesetChangesTrimmer do
 
   def trim(%Ecto.Changeset{} = changeset, field) do
     if field_new_value = get_change(changeset, field) do
-      field_new_value = to_string(field_new_value)
       put_change(changeset, field, do_trim(field_new_value))
     else
       changeset
@@ -15,4 +14,6 @@ defmodule Guessmoji.ChangesetChangesTrimmer do
     |> String.trim()
     |> String.replace(~r/\s+/, " ")
   end
+
+  defp do_trim(data), do: data
 end
