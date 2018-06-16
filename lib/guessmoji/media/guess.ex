@@ -17,18 +17,18 @@ defmodule Guessmoji.Media.Guess do
   def changeset(%Guess{} = guess, attrs) do
     guess
     |> cast(attrs, [:content, :emoji_id])
-    |> validate_required([:content])
+    |> validate_required([:content, :emoji_id])
     |> trim(:content)
     |> put_correct()
   end
 
-  def put_correct(%Ecto.Changeset{valid?: true, changes: %{content: _content}} = changeset) do
+  defp put_correct(%Ecto.Changeset{valid?: true, changes: %{content: _content}} = changeset) do
     guess = struct(Guess, changeset.changes)
     emoji = Media.get_emoji!(guess.emoji_id)
     put_change(changeset, :correct, correct?(guess, emoji))
   end
 
-  def put_correct(%Ecto.Changeset{} = changeset) do
+  defp put_correct(%Ecto.Changeset{} = changeset) do
     changeset
   end
 

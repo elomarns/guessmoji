@@ -125,10 +125,11 @@ defmodule Guessmoji.MediaTest do
     alias Guessmoji.Media.Guess
 
     test "create_guess/1 with valid data creates a guess" do
-      valid_attrs = guess_valid_attrs()
-      assert {:ok, %Guess{} = guess} = Media.create_guess(valid_attrs)
-      assert guess.emoji_id == valid_attrs.emoji_id
-      assert guess.content == valid_attrs.content
+      right_guess_attrs = guess_valid_attrs()
+      assert {:ok, %Guess{} = guess} = Media.create_guess(right_guess_attrs)
+      assert guess.emoji_id == right_guess_attrs.emoji_id
+      assert guess.content == right_guess_attrs.content
+      assert guess.correct
     end
 
     test "create_guess/1 with invalid data returns error changeset" do
@@ -136,8 +137,7 @@ defmodule Guessmoji.MediaTest do
     end
 
     test "change_guess/1 returns a guess changeset" do
-      guess = guess_fixture()
-      assert %Ecto.Changeset{} = Media.change_guess(guess)
+      assert %Ecto.Changeset{} = Media.change_guess(%Guess{})
     end
   end
 end
