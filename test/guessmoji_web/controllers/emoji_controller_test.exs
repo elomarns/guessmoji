@@ -40,7 +40,7 @@ defmodule GuessmojiWeb.EmojiControllerTest do
 
     test "redirects to new guess when data is valid", %{conn: conn} do
       valid_attrs = %{
-        content: "👑🐒",
+        content: ":crown::monkey:",
         decoded_content: "King Kong"
       }
 
@@ -52,6 +52,7 @@ defmodule GuessmojiWeb.EmojiControllerTest do
     test "renders errors when data is invalid", %{conn: conn} do
       conn = post(conn, emoji_path(conn, :create), emoji: emoji_invalid_attrs())
       assert html_response(conn, 200) =~ "New Emoji"
+      assert html_response(conn, 200) =~ "<div class=\"invalid-feedback\">"
     end
   end
 end
