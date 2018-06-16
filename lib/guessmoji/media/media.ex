@@ -4,6 +4,8 @@ defmodule Guessmoji.Media do
 
   alias Guessmoji.Media.Language
 
+  def get_language!(id), do: Repo.get!(Language, id)
+
   def get_language_by(fields), do: Repo.get_by(Language, fields)
 
   def create_language(attrs \\ %{}) do
@@ -13,6 +15,8 @@ defmodule Guessmoji.Media do
   end
 
   alias Guessmoji.Media.Category
+
+  def get_category!(id), do: Repo.get!(Category, id)
 
   def get_category_by(fields), do: Repo.get_by(Category, fields)
 
