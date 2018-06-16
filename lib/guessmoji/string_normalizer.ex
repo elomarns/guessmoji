@@ -4,21 +4,36 @@ defmodule Guessmoji.StringNormalizer do
   def normalize(string) when is_binary(string) do
     string
     |> String.downcase()
-    |> String.trim()
-    |> String.replace(~r/\s+/, " ")
-    |> normalize_symbols()
-    |> normalize_numbers()
+    |> String.replace(~r/\s*/, "")
+    |> replace_strings_by_its_equivalents()
   end
 
-  @regex_for_symbols_to_remove ~r/:|-|\.|,|;|'|"/
-  defp normalize_symbols(string) do
-    string
-    |> String.replace(@regex_for_symbols_to_remove, "")
-    |> String.replace(~r/&/, "and")
-    |> String.replace(~r/@/, "a")
-  end
+  @strings_and_its_equivalents [
+    # Punctuation
+    {":", ""},
+    {"-", ""},
+    {".", ""},
+    {",", ""},
+    {";", ""},
+    {"`", ""},
+    {"'", ""},
+    {"\"", ""},
+    {"?", ""},
+    {"!", ""},
+    {"[", ""},
+    {"]", ""},
+    {"{", ""},
+    {"}", ""},
+    {"(", ""},
+    {")", ""},
+    {"/", ""},
+    {"\\", ""},
 
-  @roman_and_decimals [
+    # Symbols
+    {"&", "and"},
+    {"@", "a"},
+
+    # Numbers
     {"xxiv", "24"},
     {"xxv", "25"},
     {"xxiii", "23"},
@@ -45,11 +60,12 @@ defmodule Guessmoji.StringNormalizer do
     {"ii", "2"},
     {"i", "1"}
   ]
-  defp normalize_numbers(string) do
-    Enum.reduce(@roman_and_decimals, string, &replace_roman_by_decimal/2)
+
+  defp replace_strings_by_its_equivalents(string) do
+    Enum.reduce(@strings_and_its_equivalents, string, &do_replace_strings_by_its_equivalents/2)
   end
 
-  defp replace_roman_by_decimal({roman, decimal}, string) do
-    String.replace(string, roman, decimal)
+  defp do_replace_strings_by_its_equivalents({original, equivalent}, string) do
+    String.replace(string, original, equivalent)
   end
 end
