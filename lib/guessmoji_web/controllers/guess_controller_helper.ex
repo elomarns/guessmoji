@@ -26,16 +26,16 @@ defmodule GuessmojiWeb.GuessControllerHelper do
     get_session(conn, :emoji_ignore_list) || []
   end
 
+  defp handle_random_emoji(conn, %Emoji{} = random_emoji) do
+    conn
+    |> redirect(to: emoji_guess_path(conn, :new, random_emoji))
+    |> halt()
+  end
+
   defp handle_random_emoji(conn, nil) do
     conn
     |> put_flash(:error, "There's no emoji available to guess. How about you create a new one?")
     |> redirect(to: emoji_path(conn, :new))
-    |> halt()
-  end
-
-  defp handle_random_emoji(conn, %Emoji{} = random_emoji) do
-    conn
-    |> redirect(to: emoji_guess_path(conn, :new, random_emoji))
     |> halt()
   end
 
@@ -69,7 +69,7 @@ defmodule GuessmojiWeb.GuessControllerHelper do
     "You are correct, sir!"
   ]
 
-  defp get_right_guess_messages, do: @right_guess_messages
+  def get_right_guess_messages, do: @right_guess_messages
 
   @wrong_guess_messages [
     "Wrong answer, my friend!",
@@ -77,7 +77,7 @@ defmodule GuessmojiWeb.GuessControllerHelper do
     "Houston, we have a wrong answer."
   ]
 
-  defp get_wrong_guess_messages, do: @wrong_guess_messages
+  def get_wrong_guess_messages, do: @wrong_guess_messages
 
   defp feedback_message_for_guess(%Guess{correct: true}) do
     Enum.random(@right_guess_messages)
