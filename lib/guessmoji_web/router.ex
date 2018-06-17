@@ -19,11 +19,11 @@ defmodule GuessmojiWeb.Router do
 
     get("/", PageController, :home)
 
-    resources("/guesses", GuessController, only: [:new])
-
     resources("/emojis", EmojiController, only: [:new, :create]) do
       resources("/guesses", GuessController, only: [:new, :create])
     end
+
+    resources("/guesses", GuessController, only: [:new])
   end
 
   # Other scopes may use custom stacks.
