@@ -88,15 +88,13 @@ defmodule GuesmojiWeb.GuessControllerHelperTest do
 
   describe "handle_emoji_ignore_list_for_guess/2" do
     test "add the emoji id if the guess is right", %{conn: conn} do
-      conn = put_session(conn, :emoji_ignore_list, [])
       conn = handle_emoji_ignore_list_for_guess(conn, %Guess{emoji_id: 1, correct: true})
       assert get_session(conn, :emoji_ignore_list) == [1]
     end
 
     test "doesn't add the emoji id if the guess is wrong", %{conn: conn} do
-      conn = put_session(conn, :emoji_ignore_list, [])
       conn = handle_emoji_ignore_list_for_guess(conn, %Guess{emoji_id: 1, correct: false})
-      assert get_session(conn, :emoji_ignore_list) == []
+      assert get_session(conn, :emoji_ignore_list) == nil
     end
   end
 
