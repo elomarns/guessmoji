@@ -44,8 +44,8 @@ function removeAnythingOtherThanEmojisFromInput(inputSelector) {
   })
 
   $(document).on("change", inputSelector, function() {
-    const content = $(this).val()
-    let emojisAsImages = emojione.shortnameToImage(content)
+    const emojiShortname = $(this).val()
+    let emojisAsImages = emojione.shortnameToImage(emojiShortname)
     emojisAsImages = $(emojisAsImages).addClass("emojioneemoji")
     $(inputSelector).data("emojioneArea").editor.html(emojisAsImages)
   })
