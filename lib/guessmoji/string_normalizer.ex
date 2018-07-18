@@ -4,11 +4,13 @@ defmodule Guessmoji.StringNormalizer do
   def normalize(string) when is_binary(string) do
     string
     |> String.downcase()
-    |> String.replace(~r/\s*/, "")
     |> replace_strings_by_its_equivalents()
   end
 
   @strings_and_its_equivalents [
+    # Whitespace
+    {~r/\s+/, ""},
+
     # Punctuation
     {":", ""},
     {"-", ""},
