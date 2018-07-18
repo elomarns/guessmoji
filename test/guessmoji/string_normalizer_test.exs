@@ -10,6 +10,24 @@ defmodule Guessmoji.StringNormalizerTest do
     assert normalize("  e l  o  m           ar ") == "elomar"
   end
 
+  @articles_to_remove [
+    "the",
+    "an",
+    "a",
+  ]
+
+  test "normalize/1 removes articles from the beginning of a string" do
+    Enum.each(@articles_to_remove, fn article ->
+      assert normalize(article) == ""
+    end)
+  end
+
+  test "normalize/1 keeps articles which are not on the beginning of a string" do
+    Enum.each(@articles_to_remove, fn article ->
+      refute normalize("a" <> article) == ""
+    end)
+  end
+
   @punctuation_to_remove [
     ":",
     "-",

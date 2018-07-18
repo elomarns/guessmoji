@@ -11,6 +11,10 @@ defmodule Guessmoji.StringNormalizer do
     # Whitespace
     {~r/\s+/, ""},
 
+    # Articles
+    {~r/^the/, ""},
+    {~r/^an?/, ""},
+
     # Punctuation
     {":", ""},
     {"-", ""},
