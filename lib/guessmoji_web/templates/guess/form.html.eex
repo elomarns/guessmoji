@@ -1,4 +1,10 @@
-<%= form_for @changeset, @action, fn f -> %>
+<%= form_for @changeset, 
+             @action, 
+             [
+               "id": :new_guess,
+               "data-emoji-content": @emoji.content
+             ], 
+             fn f -> %>
   <div class="form-group">
     <%= label f, :content, class: "control-label", "data-emoji-content": @emoji.content do %>
       Guess the movie from the emojis:

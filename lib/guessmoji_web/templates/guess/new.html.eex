@@ -9,5 +9,7 @@
 
   <div class="card-footer">
     <%= link "This is hard, give me another one", to: guess_path(@conn, :new) %>
+    
+    <%= render "social_networks_links.html", assigns %>
   </div>
 </div>

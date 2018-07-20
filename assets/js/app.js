@@ -22,6 +22,8 @@ import "phoenix_html"
 import { addEmojiPicker } from "./emoji_form"
 addEmojiPicker('#emoji_content')
 
-import { showEmojiContentUsingEmojiOneImages, activateEmojiTipLink } from "./guess_form"
+import { showEmojiContentUsingEmojiOneImages, activateEmojiTipLink, 
+  addTwitterShareButton } from "./guess_form"
 showEmojiContentUsingEmojiOneImages('label[for="guess_content"]')
 activateEmojiTipLink('#show_tip')
+addTwitterShareButton('#social_networks_links', '#new_guess')
