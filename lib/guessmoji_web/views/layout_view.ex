@@ -1,6 +1,8 @@
 defmodule GuessmojiWeb.LayoutView do
   use GuessmojiWeb, :view
 
+  def current_url(conn), do: Plug.Conn.request_url(conn)
+
   def alert(conn, alert_type) do
     if flash_message = get_flash(conn, alert_type) do
       content_tag(:div, class: classes_for_alert(alert_type), role: :alert) do

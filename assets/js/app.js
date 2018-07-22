@@ -27,3 +27,6 @@ import { showEmojiContentUsingEmojiOneImages, activateEmojiTipLink,
 showEmojiContentUsingEmojiOneImages('label[for="guess_content"]')
 activateEmojiTipLink('#show_tip')
 addTwitterShareButton('#social_networks_links', '#new_guess')
+
+import { addFacebookShareButton } from "./facebook"
+addFacebookShareButton('#social_networks_links')

@@ -5,4 +5,11 @@ span.guess_emoji_content img {
 
 #social_networks_links {
   margin-bottom: -6px;  
+  position: relative;
+}
+
+#social_networks_links .fb-share-button {
+  position: absolute;
+  top: 0;
+  right: 85px;
 }
