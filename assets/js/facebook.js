@@ -16,10 +16,10 @@ function addFacebookDiv(containerSelector) {
 }
 
 function addFacebookJavaScriptFile() {
-  if($('#facebook-jssdk').length == 0) {
+  if($('#facebook_js_sdk').length == 0) {
     const script = $('<script>')
       .attr('src', 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0&appId=175326889855001&autoLogAppEvents=1')
-      .attr('id', 'facebook-jssdk')
+      .attr('id', 'facebook_js_sdk')
           
     $('script:first').before(script)
   }

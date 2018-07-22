@@ -23,7 +23,10 @@
       </main>
     </div>
 
-    <!-- EmojiOne doesn't work with brunch build --production, so it's being included here. -->
+    <!-- 
+      EmojiOne doesn't work with brunch build --production, 
+      so it's being included here. 
+    -->
     <script src="<%= static_path(@conn, "/js/emojione.min.js") %>""></script>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
