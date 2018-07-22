@@ -2,11 +2,12 @@
              @action, 
              [
                "id": :new_guess,
-               "data-emoji-content": @emoji.content
+               "data-emoji-content": @emoji.content,
+               "data-emoji-tip": @emoji.tip
              ], 
              fn f -> %>
   <div class="form-group">
-    <%= label f, :content, class: "control-label", "data-emoji-content": @emoji.content do %>
+    <%= label f, :content, class: "control-label" do %>
       Guess the movie from the emojis:
       <%= content_tag :span, @emoji.content, class: :guess_emoji_content %>
     <% end %>
@@ -19,7 +20,6 @@
     <p>
       Tip:
       <%= link "show", to: show_emoji_tip_url(@action), id: "show_tip" %>
-      <span data-emoji-tip="<%= @emoji.tip %>"></span>
     </p>
   <% end %>
 

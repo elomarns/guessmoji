@@ -1,22 +1,22 @@
-export function showEmojiContentUsingEmojiOneImages(labelSelector) {
+export function showEmojiContentUsingEmojiOneImages(labelSelector, emojiMetadataContainerSelector) {
   $(document).ready(() => {
     const label = $(labelSelector)
 
     if(label.length > 0) {
-      const emojiShortname = label.data("emoji-content")
+      const emojiShortname = $(emojiMetadataContainerSelector).data('emoji-content')
       const emojisAsImages = emojione.shortnameToImage(emojiShortname)
-      label.find(".guess_emoji_content").html(emojisAsImages)
+      label.find('.guess_emoji_content').html(emojisAsImages)
     }
   })
 }
 
-export function activateEmojiTipLink(linkSelector) {
+export function activateEmojiTipLink(linkSelector, emojiMetadataContainerSelector) {
   $(document).on('click', linkSelector, function(event) {
     $(this).hide()
 
-    const tipContainer = $(this).siblings('[data-emoji-tip]')
-    const tip = tipContainer.data('emoji-tip')
-    tipContainer.html(tip)
+    const tip = $(emojiMetadataContainerSelector).data('emoji-tip')
+    const tipContainer = $('<span>').html(tip)
+    $(this).after(tipContainer)
 
     event.preventDefault()
   })

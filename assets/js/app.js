@@ -23,8 +23,8 @@ import { addEmojiPicker } from "./emoji_form"
 addEmojiPicker('#emoji_content')
 
 import { showEmojiContentUsingEmojiOneImages, activateEmojiTipLink } from "./guess_form"
-showEmojiContentUsingEmojiOneImages('label[for="guess_content"]')
-activateEmojiTipLink('#show_tip')
+showEmojiContentUsingEmojiOneImages('label[for="guess_content"]', '#new_guess')
+activateEmojiTipLink('#show_tip', '#new_guess')
 
 import { addTwitterShareButton } from "./twitter"
 addTwitterShareButton('#social_networks_links', '#new_guess')
