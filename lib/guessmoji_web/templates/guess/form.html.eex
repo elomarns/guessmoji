@@ -25,7 +25,7 @@
   <% end %>
 
   <div class="form-group mb-0">
-    <%= submit "Guess!", class: "btn btn-primary" %>
+    <%= submit "Guess", class: "btn btn-primary" %>
 
     <button type="button" class="btn btn-info" id="show_emoji_decoded_content">
       Show the answer
