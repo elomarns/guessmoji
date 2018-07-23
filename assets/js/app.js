@@ -22,9 +22,12 @@ import "phoenix_html"
 import { addEmojiPicker } from "./emoji_form"
 addEmojiPicker('#emoji_content')
 
-import { showEmojiContentUsingEmojiOneImages, activateEmojiTipLink } from "./guess_form"
+import { showEmojiContentUsingEmojiOneImages, activateEmojiTipLink, 
+  activateEmojiDecodedContentButton } from "./guess_form"
 showEmojiContentUsingEmojiOneImages('label[for="guess_content"]', '#new_guess')
 activateEmojiTipLink('#show_tip', '#new_guess')
+activateEmojiDecodedContentButton('#show_emoji_decoded_content', 
+  '#new_guess', '#guess_content')
 
 import { addTwitterShareButton } from "./twitter"
 addTwitterShareButton('#social_networks_links', '#new_guess')

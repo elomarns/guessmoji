@@ -3,6 +3,7 @@
              [
                "id": :new_guess,
                "data-emoji-content": @emoji.content,
+               "data-emoji-decoded-content": @emoji.decoded_content,
                "data-emoji-tip": @emoji.tip
              ], 
              fn f -> %>
@@ -25,5 +26,9 @@
 
   <div class="form-group mb-0">
     <%= submit "Guess!", class: "btn btn-primary" %>
+
+    <button type="button" class="btn btn-info" id="show_emoji_decoded_content">
+      Show the answer
+    </button>
   </div>
 <% end %>

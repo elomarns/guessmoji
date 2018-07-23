@@ -21,3 +21,18 @@ export function activateEmojiTipLink(linkSelector, emojiMetadataContainerSelecto
     event.preventDefault()
   })
 }
+
+export function activateEmojiDecodedContentButton(buttonSelector, 
+  emojiMetadataContainerSelector, guessContentInputSelector) {
+  $(document).on('click', buttonSelector, function() {
+    const emojiDecodedContent = 
+      $(emojiMetadataContainerSelector).data('emoji-decoded-content')
+    const emojiDecodedContentContainer = $('<p>')
+        .attr('id', 'emoji_decoded_content')
+        .html('Answer: ' + emojiDecodedContent)
+    $(guessContentInputSelector).parent().after(emojiDecodedContentContainer)
+
+    $(guessContentInputSelector).remove()
+    $(this).parent().remove()
+  })
+}
